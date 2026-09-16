@@ -419,33 +419,46 @@ export default function App() {
               </p>
 
               {/* Price & Offer Box */}
-              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-3 shadow-xs flex items-center justify-between">
-                <div>
-                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
-                    Prix Spécial Mode Trend
-                  </span>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-serif text-3xl sm:text-4xl font-black text-[#1C1008]">
-                      249 DH
+              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-2 shadow-xs">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
+                      Offre de lancement
+                    </span>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="font-serif text-3xl sm:text-4xl font-black text-[#1C1008]">
+                        249 DH
+                      </span>
+                      <span className="text-sm text-neutral-400 line-through font-semibold">
+                        299 DH
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-right flex flex-col gap-1.5 items-end">
+                    <span className="inline-flex items-center gap-1 bg-[#128C4F]/10 text-[#128C4F] text-xs font-bold px-2.5 py-1 rounded-full">
+                      ✓ Livraison Gratuite
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#8A5C38] bg-[#8A5C38]/8 px-2 py-0.5 rounded-full">
+                      Offre valable cette semaine
                     </span>
                   </div>
                 </div>
-
-                <div className="text-right">
-                  <span className="inline-flex items-center gap-1 bg-[#128C4F]/10 text-[#128C4F] text-xs font-bold px-2.5 py-1 rounded-full">
-                    ✓ Livraison Gratuite
-                  </span>
+                <div className="bg-gradient-to-r from-[#8A5C38]/10 to-[#128C4F]/10 rounded-xl px-3 py-2 text-center">
+                  <p className="text-[11px] sm:text-xs font-bold text-[#1C1008]">
+                    🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc
+                  </p>
                 </div>
               </div>
 
               {/* Trust Compact Line */}
               <div className="flex items-center justify-between text-xs font-semibold text-[#1C1008] bg-[#FAF6F0] border border-[#E6D9C8] rounded-xl px-3 py-2.5 mb-3.5">
                 <span className="flex items-center gap-1.5 text-[#128C4F] font-bold">
-                  <IconCheck size={16} />
+                  <IconBanknote size={16} />
                   <span>Paiement à la livraison</span>
                 </span>
-                <span className="text-[#5C3A1C] text-[11px]">
-                  🚚 Partout au Maroc
+                <span className="flex items-center gap-1.5 text-[#5C3A1C] text-[11px]">
+                  <IconTruck size={14} />
+                  <span>Partout au Maroc</span>
                 </span>
               </div>
 
@@ -455,11 +468,11 @@ export default function App() {
                 className="w-full min-h-[54px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-3.5 px-5 rounded-2xl font-bold text-base shadow-md shadow-[#25D366]/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
                 <IconWhatsApp size={22} />
-                <span>Commander — 249 DH</span>
+                <span>Commander maintenant — Paiement à la livraison</span>
               </button>
 
               <p className="text-[11px] text-center text-[#5C3A1C] mt-2">
-                Paiement à la livraison • Livraison partout au Maroc
+                ✅ Confirmation WhatsApp avant expédition
               </p>
 
             </div>
@@ -554,20 +567,21 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
             
             {/* Card 1: Lit & PC */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-44 sm:h-48 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_bed_laptop.jpg"
                   alt="Table Mode Trend au lit avec ordinateur"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
-              <div className="p-4">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-1">Chambre & Confort</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Au lit & Télétravail</h3>
+              <div className="p-3.5">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Chambre & Confort</span>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Au lit & Télétravail</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Glisse sous le cadre du lit pour soutenir confortablement votre PC portable, livre et café.
                 </p>
@@ -576,16 +590,17 @@ export default function App() {
 
             {/* Card 2: Tablette & Salon */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-44 sm:h-48 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_tablet_relax.jpg"
                   alt="Table Mode Trend avec tablette et smartphone"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
-              <div className="p-4">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-1">Salon & Détente</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Depuis le fauteuil</h3>
+              <div className="p-3.5">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Salon & Détente</span>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Depuis le fauteuil</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Support stable pour regarder vos séries sur tablette, poser votre boisson ou prendre un encas.
                 </p>
@@ -594,16 +609,17 @@ export default function App() {
 
             {/* Card 3: Multi-usages 180° */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-44 sm:h-48 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_tilt_multipurpose.jpg"
                   alt="Table Mode Trend inclinaison 0 à 180 degrés"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
-              <div className="p-4">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-1">Polyvalence 0° - 180°</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Multi-usages & Pupitre</h3>
+              <div className="p-3.5">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Polyvalence 0° - 180°</span>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Multi-usages & Pupitre</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Plateau inclinable avec réglette d'arrêt pour lecture, dessin, repas ou support de partitions.
                 </p>
@@ -612,16 +628,17 @@ export default function App() {
 
             {/* Card 4: Réglages & Détails */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-44 sm:h-48 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_structure_details.jpg"
                   alt="Table Mode Trend détails de réglage et rotation"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
                 />
               </div>
-              <div className="p-4">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-1">Finition & Réglages</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Hauteur & Rangement</h3>
+              <div className="p-3.5">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Finition & Réglages</span>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Hauteur & Rangement</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Molette rotative pour ajuster la hauteur en douceur et plateau rabattable pour un gain de place.
                 </p>
@@ -685,6 +702,92 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
+          6b. TÉMOIGNAGES VIDÉO (Placeholders)
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-8 sm:py-12 bg-[#FAF6F0] border-b border-[#E6D9C8]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+            <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-1">
+              Avis Clients
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1C1008]">
+              Ils ont adopté Mode Trend chez eux
+            </h2>
+            <p className="text-xs sm:text-sm text-[#5C3A1C] mt-1">
+              Découvrez les retours de nos clients partout au Maroc.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+
+            {/* Testimonial 1 */}
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
+              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
+                  </div>
+                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+                </div>
+                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Casablanca</div>
+              </div>
+              <div className="p-3.5">
+                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Sara</p>
+                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
+                  "Très pratique pour travailler depuis le canapé."
+                </p>
+              </div>
+            </div>
+
+            {/* Testimonial 2 */}
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
+              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
+                  </div>
+                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+                </div>
+                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Rabat</div>
+              </div>
+              <div className="p-3.5">
+                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Youssef</p>
+                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
+                  "Stable, facile à régler et livraison rapide."
+                </p>
+              </div>
+            </div>
+
+            {/* Testimonial 3 */}
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
+              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
+                  </div>
+                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+                </div>
+                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Marrakech</div>
+              </div>
+              <div className="p-3.5">
+                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Imane</p>
+                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
+                  "J'en ai pris deux : une pour le salon et une pour la chambre."
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          <p className="text-[10px] text-center text-neutral-400 mt-4 italic">
+            Les témoignages ci-dessus seront complétés avec les vidéos réelles de nos clients.
+          </p>
+
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
           7. PACKS & DEDICATED ORDER FORM SECTION
       ───────────────────────────────────────────────────────────── */}
       <section
@@ -704,9 +807,9 @@ export default function App() {
           </div>
 
           {/* 3 Pack Selection Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-8 items-stretch">
             
-            {/* Pack 1 */}
+            {/* Pack 1 — Standard */}
             <div
               onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
@@ -725,32 +828,59 @@ export default function App() {
                 </div>
                 <p className="text-[11px] text-[#5C3A1C]">Prix unitaire standard.</p>
               </div>
-              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60 text-xs font-bold text-[#8A5C38]">
-                {form.quantite === 1 ? "✓ Formule choisie" : "Choisir 1 table"}
+              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60">
+                <button
+                  type="button"
+                  className={`w-full py-2 rounded-xl text-xs font-bold transition-all ${
+                    form.quantite === 1
+                      ? "bg-[#8A5C38] text-white"
+                      : "bg-[#F9F6F1] text-[#8A5C38] hover:bg-[#F2EBE0]"
+                  }`}
+                >
+                  {form.quantite === 1 ? "✓ Formule choisie" : "Choisir 1 table"}
+                </button>
               </div>
             </div>
 
-            {/* Pack 2 (Duo) */}
+            {/* Pack 2 (Duo) — VISUELLEMENT DOMINANT */}
             <div
               onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
-              className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
+              className={`relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 2
-                  ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/15"
-                  : "bg-white/80 border-[#E6D9C8] hover:border-[#8A5C38]/40"
+                  ? "bg-white border-[#8A5C38] shadow-xl ring-2 ring-[#8A5C38]/20"
+                  : "bg-white border-[#8A5C38]/50 shadow-lg hover:border-[#8A5C38] hover:shadow-xl"
               }`}
             >
+              {/* Badge LE PLUS CHOISI */}
+              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#8A5C38] text-white text-[10px] font-extrabold uppercase tracking-wider px-4 py-1 rounded-full shadow-md whitespace-nowrap">
+                ★ Le plus choisi
+              </div>
               <div>
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-1 mt-1">
                   <span className="text-xs font-bold text-[#8A5C38]">Pack 2 Tables (Duo)</span>
-                  <span className="text-[10px] font-bold text-[#128C4F] bg-[#128C4F]/10 px-2 py-0.5 rounded-full">Économisez 99 DH</span>
+                  <span className="text-[10px] font-bold text-white bg-[#128C4F] px-2 py-0.5 rounded-full">-99 DH</span>
                 </div>
-                <div className="font-serif text-2xl font-black text-[#1C1008] my-1">
+                <div className="font-serif text-3xl font-black text-[#1C1008] my-1">
                   399 DH
                 </div>
-                <p className="text-[11px] text-[#5C3A1C]">Soit 199.5 DH / table (vs 498 DH).</p>
+                <p className="text-xs font-bold text-[#8A5C38] mb-0.5">Soit 199,50 DH / table</p>
+                <p className="text-[11px] text-[#5C3A1C]">Idéal pour salon + chambre</p>
+                <div className="flex items-center gap-1.5 mt-2 text-[11px] text-[#128C4F] font-semibold">
+                  <IconTruck size={13} />
+                  <span>Livraison gratuite sur les 2 tables</span>
+                </div>
               </div>
-              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60 text-xs font-bold text-[#8A5C38]">
-                {form.quantite === 2 ? "✓ Formule choisie" : "Choisir le Pack Duo"}
+              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60">
+                <button
+                  type="button"
+                  className={`w-full py-2.5 rounded-xl text-xs font-bold transition-all ${
+                    form.quantite === 2
+                      ? "bg-[#25D366] text-white shadow-md"
+                      : "bg-[#8A5C38] text-white hover:bg-[#7A4F30] shadow-md"
+                  }`}
+                >
+                  {form.quantite === 2 ? "✓ Pack Duo choisi" : "Choisir le Pack Duo — 399 DH"}
+                </button>
               </div>
             </div>
 
@@ -766,15 +896,25 @@ export default function App() {
               <div>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-bold text-[#8A5C38]">Pack 3 Tables (Famille)</span>
-                  <span className="text-[10px] font-bold text-[#128C4F] bg-[#128C4F]/10 px-2 py-0.5 rounded-full">Économisez 178 DH</span>
+                  <span className="text-[10px] font-bold text-[#8A5C38] bg-[#8A5C38]/10 px-2 py-0.5 rounded-full">Meilleur prix / table</span>
                 </div>
                 <div className="font-serif text-2xl font-black text-[#1C1008] my-1">
                   569 DH
                 </div>
-                <p className="text-[11px] text-[#5C3A1C]">Soit 189.6 DH / table (vs 747 DH).</p>
+                <p className="text-xs font-semibold text-[#8A5C38] mb-0.5">Soit 189,67 DH / table</p>
+                <p className="text-[11px] text-[#5C3A1C]">Économisez 178 DH (vs 747 DH).</p>
               </div>
-              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60 text-xs font-bold text-[#8A5C38]">
-                {form.quantite === 3 ? "✓ Formule choisie" : "Choisir le Pack 3 tables"}
+              <div className="mt-3 pt-2 border-t border-[#E6D9C8]/60">
+                <button
+                  type="button"
+                  className={`w-full py-2 rounded-xl text-xs font-bold transition-all ${
+                    form.quantite === 3
+                      ? "bg-[#8A5C38] text-white"
+                      : "bg-[#F9F6F1] text-[#8A5C38] hover:bg-[#F2EBE0]"
+                  }`}
+                >
+                  {form.quantite === 3 ? "✓ Pack Famille choisi" : "Choisir le Pack Famille"}
+                </button>
               </div>
             </div>
 
@@ -949,8 +1089,11 @@ export default function App() {
               </button>
 
               {/* Clarification text */}
-              <p className="text-[11px] text-neutral-500 text-center leading-relaxed">
-                ℹ️ En cliquant sur le bouton, votre message de commande est préparé automatiquement. Envoyez-le sur WhatsApp pour que nous validions votre livraison.
+              <p className="text-[11px] text-[#128C4F] font-semibold text-center leading-relaxed">
+                ✅ Confirmation WhatsApp avant expédition — Aucun engagement sans votre validation
+              </p>
+              <p className="text-[10px] text-neutral-400 text-center mt-1">
+                Votre message de commande est préparé automatiquement. Envoyez-le pour que nous validions votre livraison.
               </p>
             </form>
 
@@ -1070,7 +1213,7 @@ export default function App() {
             className="min-h-[46px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center gap-1.5 shadow-md shadow-[#25D366]/25 transition-all cursor-pointer"
           >
             <IconWhatsApp size={16} />
-            <span>Commander (COD)</span>
+            <span>Commander — Paiement à la livraison</span>
           </button>
         </div>
       )}
