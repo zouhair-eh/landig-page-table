@@ -832,15 +832,12 @@ export default function App() {
             {/* Testimonial 1 */}
             <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80"
-                  alt="Sara avis client"
-                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
-                  loading="lazy"
-                />
+                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
+                  S.A
+                </div>
                 <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Sara</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Casablanca</p>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Sara A.</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Casablanca • Quartier Bourgogne</p>
                 </div>
               </div>
               <div className="flex gap-0.5 mb-2.5">
@@ -853,22 +850,19 @@ export default function App() {
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Avis client — Livraison en 3 jours</span>
+                <span>Commande confirmée & livrée (Paiement COD)</span>
               </div>
             </div>
 
             {/* Testimonial 2 */}
             <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80"
-                  alt="Youssef avis client"
-                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
-                  loading="lazy"
-                />
+                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
+                  Y.M
+                </div>
                 <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Youssef</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Rabat</p>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Youssef M.</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Rabat • Agdal</p>
                 </div>
               </div>
               <div className="flex gap-0.5 mb-2.5">
@@ -877,26 +871,23 @@ export default function App() {
                 ))}
               </div>
               <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
-                "J'ai commandé via WhatsApp, le service client m'a rappelé pour confirmer. La livraison était gratuite et le livreur m'a contacté avant de venir. Produit solide et bien fini."
+                "J'ai passé la commande, le service client m'a rappelé pour confirmer l'adresse. La livraison était gratuite et le livreur m'a appelé avant de passer. Produit solide et conforme."
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Avis client — Livraison en 2 jours</span>
+                <span>Commande confirmée & livrée (Paiement COD)</span>
               </div>
             </div>
 
             {/* Testimonial 3 */}
             <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80"
-                  alt="Imane avis client"
-                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
-                  loading="lazy"
-                />
+                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
+                  I.B
+                </div>
                 <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Imane</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Marrakech</p>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Imane B.</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Marrakech • Guéliz</p>
                 </div>
               </div>
               <div className="flex gap-0.5 mb-2.5">
@@ -909,7 +900,7 @@ export default function App() {
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Avis client — Pack Duo</span>
+                <span>Commande confirmée & livrée (Pack Duo)</span>
               </div>
             </div>
 
