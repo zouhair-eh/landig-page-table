@@ -108,20 +108,30 @@ export function trackInitiateCheckout(data?: {
 /**
  * 4. Lead — Déclenché quand l'utilisateur soumet correctement le formulaire de commande
  * (AUCUN événement Purchase n'est envoyé ici conformément aux exigences)
+ * Compatible Conversions API (CAPI) avec dédoublonnage via eventID
  */
-export function trackLead(data?: {
-  content_name?: string;
-  value?: number;
-  currency?: string;
-  quantity?: number;
-}) {
+export function trackLead(
+  data?: {
+    content_name?: string;
+    value?: number;
+    currency?: string;
+    quantity?: number;
+  },
+  eventId?: string
+) {
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Lead", {
+    const payload = {
       content_name: data?.content_name || "Table d'Appoint Mode Trend (Réglable & Inclinable)",
       value: data?.value || 249,
       currency: data?.currency || "MAD",
       num_items: data?.quantity || 1,
-    });
+    };
+
+    if (eventId) {
+      window.fbq("track", "Lead", payload, { eventID: eventId });
+    } else {
+      window.fbq("track", "Lead", payload);
+    }
   }
 }
 
