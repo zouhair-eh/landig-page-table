@@ -11,8 +11,8 @@ import {
 /* ─────────────────────────────────────────────────────────────────────────────
    CONFIG & WHATSAPP LINK GENERATOR
 ───────────────────────────────────────────────────────────────────────────── */
-// Numéro WhatsApp boutique (remplacez par votre numéro si nécessaire)
-const WHATSAPP_NUMBER = "212660000000";
+// Numéro WhatsApp boutique
+const WHATSAPP_NUMBER = "212767951563";
 
 interface OrderData {
   nom: string;
