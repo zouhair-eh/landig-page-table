@@ -245,7 +245,7 @@ export default function App() {
     }
   }, []);
 
-  // Auto-hide sticky bar when the order form enters the screen & track checkout initiation
+  // Auto-hide sticky bar when the order form enters the screen (NO InitiateCheckout on scroll)
   useEffect(() => {
     const target = orderFormRef.current;
     if (!target) return;
@@ -253,15 +253,6 @@ export default function App() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsFormVisible(entry.isIntersecting);
-        if (entry.isIntersecting && !initiateCheckoutTrackedRef.current) {
-          trackInitiateCheckout({
-            content_name: "Table d'Appoint Mode Trend",
-            value: 249,
-            currency: "MAD",
-            num_items: 1,
-          });
-          initiateCheckoutTrackedRef.current = true;
-        }
       },
       { threshold: 0.05 }
     );
@@ -290,13 +281,13 @@ export default function App() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 3. Meta Pixel: Trigger InitiateCheckout when user initiates purchase action
+  // 3. Meta Pixel: Trigger InitiateCheckout ONLY on genuine intent (CTA click or starting to fill form)
   const triggerInitiateCheckout = (qty?: number) => {
     if (!initiateCheckoutTrackedRef.current) {
       const selectedQty = qty || form.quantite;
       const s = getOrderSummary(selectedQty);
       trackInitiateCheckout({
-        content_name: "Table d'Appoint Mode Trend",
+        content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
         value: s.price,
         currency: "MAD",
         num_items: selectedQty,
@@ -316,7 +307,7 @@ export default function App() {
     }
   };
 
-  // 4. Meta Pixel: Track Lead on form submission (NO Purchase event sent)
+  // 4. Meta Pixel: Track Lead on form submission with unique eventID for CAPI deduplication
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
@@ -325,12 +316,17 @@ export default function App() {
     }
 
     const currentSummary = getOrderSummary(form.quantite);
-    trackLead({
-      content_name: "Table d'Appoint Mode Trend",
-      value: currentSummary.price,
-      currency: "MAD",
-      quantity: form.quantite,
-    });
+    const leadEventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
+
+    trackLead(
+      {
+        content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
+        value: currentSummary.price,
+        currency: "MAD",
+        quantity: form.quantite,
+      },
+      leadEventId
+    );
 
     const url = generateWhatsAppLink(form);
     window.open(url, "_blank", "noopener,noreferrer");
@@ -832,7 +828,7 @@ export default function App() {
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Achat vérifié — Livraison en 3 jours</span>
+                <span>Avis client — Livraison en 3 jours</span>
               </div>
             </div>
 
@@ -860,7 +856,7 @@ export default function App() {
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Achat vérifié — Livraison en 2 jours</span>
+                <span>Avis client — Livraison en 2 jours</span>
               </div>
             </div>
 
@@ -888,7 +884,7 @@ export default function App() {
               </p>
               <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Achat vérifié — Pack Duo</span>
+                <span>Avis client — Pack Duo</span>
               </div>
             </div>
 
@@ -921,10 +917,7 @@ export default function App() {
             
             {/* Pack 1 — Standard */}
             <div
-              onClick={() => {
-                setForm((p) => ({ ...p, quantite: 1 }));
-                triggerInitiateCheckout(1);
-              }}
+              onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 1
                   ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/15"
@@ -957,10 +950,7 @@ export default function App() {
 
             {/* Pack 2 (Duo) — VISUELLEMENT DOMINANT */}
             <div
-              onClick={() => {
-                setForm((p) => ({ ...p, quantite: 2 }));
-                triggerInitiateCheckout(2);
-              }}
+              onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
               className={`relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 2
                   ? "bg-white border-[#8A5C38] shadow-xl ring-2 ring-[#8A5C38]/20"
@@ -1002,10 +992,7 @@ export default function App() {
 
             {/* Pack 3 (Family) */}
             <div
-              onClick={() => {
-                setForm((p) => ({ ...p, quantite: 3 }));
-                triggerInitiateCheckout(3);
-              }}
+              onClick={() => setForm((p) => ({ ...p, quantite: 3 }))}
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 3
                   ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/15"
@@ -1093,6 +1080,7 @@ export default function App() {
                   autoComplete="name"
                   placeholder="Ex: Mohamed Alami"
                   value={form.nom}
+                  onFocus={() => triggerInitiateCheckout()}
                   onChange={(e) => setForm((p) => ({ ...p, nom: e.target.value }))}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
@@ -1110,6 +1098,7 @@ export default function App() {
                   autoComplete="tel"
                   placeholder="Ex: 06 12 34 56 78"
                   value={form.telephone}
+                  onFocus={() => triggerInitiateCheckout()}
                   onChange={(e) => setForm((p) => ({ ...p, telephone: e.target.value }))}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
@@ -1126,7 +1115,10 @@ export default function App() {
                   autoComplete="address-level2"
                   placeholder="Ex: Casablanca, Rabat, Marrakech..."
                   value={form.ville}
-                  onFocus={() => setShowCityDropdown(true)}
+                  onFocus={() => {
+                    triggerInitiateCheckout();
+                    setShowCityDropdown(true);
+                  }}
                   onChange={(e) => {
                     setForm((p) => ({ ...p, ville: e.target.value }));
                     setCityFilter(e.target.value);
@@ -1167,6 +1159,7 @@ export default function App() {
                   autoComplete="street-address"
                   placeholder="Quartier, Rue, N° Immeuble ou Maison"
                   value={form.adresse}
+                  onFocus={() => triggerInitiateCheckout()}
                   onChange={(e) => setForm((p) => ({ ...p, adresse: e.target.value }))}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
