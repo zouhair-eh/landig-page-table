@@ -1,0 +1,10 @@
+{
+  "description": "Discover a premium landing page designed for a versatile adjustable side table, enabling Moroccan customers to easily order via WhatsApp with cash on delivery.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
