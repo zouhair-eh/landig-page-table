@@ -59,7 +59,11 @@ export function initMetaPixel(pixelId: string = META_PIXEL_ID) {
  */
 export function trackPageView() {
   if (typeof window !== "undefined" && window.fbq) {
+    if ((window as any).__pageViewFired) {
+      return;
+    }
     window.fbq("track", "PageView");
+    (window as any).__pageViewFired = true;
   }
 }
 
