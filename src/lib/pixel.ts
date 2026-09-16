@@ -87,7 +87,7 @@ export function trackViewContent(data?: {
 }
 
 /**
- * 3. InitiateCheckout — Déclenché quand l'utilisateur accède au formulaire de commande
+ * 3. InitiateCheckout — Déclenché lors de la première interaction avec les champs du formulaire
  */
 export function trackInitiateCheckout(data?: {
   content_name?: string;
@@ -96,6 +96,10 @@ export function trackInitiateCheckout(data?: {
   num_items?: number;
 }) {
   if (typeof window !== "undefined" && window.fbq) {
+    if ((window as any).__initiateCheckoutFired) {
+      return;
+    }
+    (window as any).__initiateCheckoutFired = true;
     window.fbq("track", "InitiateCheckout", {
       content_name: data?.content_name || "Table d'Appoint Mode Trend (Réglable & Inclinable)",
       value: data?.value || 249,

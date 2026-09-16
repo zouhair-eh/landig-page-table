@@ -281,18 +281,20 @@ export default function App() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 3. Meta Pixel: Trigger InitiateCheckout ONLY on genuine intent (CTA click or starting to fill form)
-  const triggerInitiateCheckout = (qty?: number) => {
+  // Guard against double submit / rapid double clicks
+  const isSubmittingRef = useRef(false);
+
+  // 3. Meta Pixel: Trigger InitiateCheckout ONLY on genuine interaction with form fields (first focus or input)
+  const triggerInitiateCheckout = () => {
     if (!initiateCheckoutTrackedRef.current) {
-      const selectedQty = qty || form.quantite;
-      const s = getOrderSummary(selectedQty);
+      initiateCheckoutTrackedRef.current = true;
+      const s = getOrderSummary(form.quantite);
       trackInitiateCheckout({
         content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
         value: s.price,
         currency: "MAD",
-        num_items: selectedQty,
+        num_items: form.quantite,
       });
-      initiateCheckoutTrackedRef.current = true;
     }
   };
 
@@ -300,24 +302,41 @@ export default function App() {
     if (qtyChoice) {
       setForm((prev) => ({ ...prev, quantite: qtyChoice }));
     }
-    triggerInitiateCheckout(qtyChoice);
+    // No InitiateCheckout event triggered on button click / scroll
     const el = document.getElementById("order-form-section");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  // 4. Meta Pixel: Track Lead on form submission with unique eventID for CAPI deduplication
+  // 4. Meta Pixel: Track Lead strictly on valid form submit, protected against double clicks & duplicate eventIDs
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
-    if (!form.nom.trim() || !form.telephone.trim() || !form.ville.trim() || !form.adresse.trim()) {
+
+    // Double submit protection: ignore any rapid re-clicks / double clicks
+    if (isSubmittingRef.current) {
       return;
     }
 
+    const nomTrimmed = form.nom.trim();
+    const phoneTrimmed = form.telephone.trim();
+    const villeTrimmed = form.ville.trim();
+    const adresseTrimmed = form.adresse.trim();
+
+    // Strict validation of required fields
+    if (!nomTrimmed || !phoneTrimmed || !villeTrimmed || !adresseTrimmed) {
+      return;
+    }
+
+    // Lock submission immediately to prevent duplicate Lead firing
+    isSubmittingRef.current = true;
+
     const currentSummary = getOrderSummary(form.quantite);
+    // 1 Submit = 1 Single EventID generated ONCE
     const leadEventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
+    // Fire 1 single Lead event with the unique eventID
     trackLead(
       {
         content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
@@ -328,8 +347,14 @@ export default function App() {
       leadEventId
     );
 
+    // Open WhatsApp
     const url = generateWhatsAppLink(form);
     window.open(url, "_blank", "noopener,noreferrer");
+
+    // Cooldown lock to ensure double clicks never generate duplicate leads
+    setTimeout(() => {
+      isSubmittingRef.current = false;
+    }, 4000);
   };
 
   // 5. Meta Pixel: Track Contact on direct WhatsApp support click
@@ -1081,7 +1106,10 @@ export default function App() {
                   placeholder="Ex: Mohamed Alami"
                   value={form.nom}
                   onFocus={() => triggerInitiateCheckout()}
-                  onChange={(e) => setForm((p) => ({ ...p, nom: e.target.value }))}
+                  onChange={(e) => {
+                    triggerInitiateCheckout();
+                    setForm((p) => ({ ...p, nom: e.target.value }));
+                  }}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
               </div>
@@ -1099,7 +1127,10 @@ export default function App() {
                   placeholder="Ex: 06 12 34 56 78"
                   value={form.telephone}
                   onFocus={() => triggerInitiateCheckout()}
-                  onChange={(e) => setForm((p) => ({ ...p, telephone: e.target.value }))}
+                  onChange={(e) => {
+                    triggerInitiateCheckout();
+                    setForm((p) => ({ ...p, telephone: e.target.value }));
+                  }}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
               </div>
@@ -1120,6 +1151,7 @@ export default function App() {
                     setShowCityDropdown(true);
                   }}
                   onChange={(e) => {
+                    triggerInitiateCheckout();
                     setForm((p) => ({ ...p, ville: e.target.value }));
                     setCityFilter(e.target.value);
                     setShowCityDropdown(true);
@@ -1136,6 +1168,7 @@ export default function App() {
                         type="button"
                         key={city}
                         onClick={() => {
+                          triggerInitiateCheckout();
                           setForm((p) => ({ ...p, ville: city }));
                           setShowCityDropdown(false);
                         }}
@@ -1160,7 +1193,10 @@ export default function App() {
                   placeholder="Quartier, Rue, N° Immeuble ou Maison"
                   value={form.adresse}
                   onFocus={() => triggerInitiateCheckout()}
-                  onChange={(e) => setForm((p) => ({ ...p, adresse: e.target.value }))}
+                  onChange={(e) => {
+                    triggerInitiateCheckout();
+                    setForm((p) => ({ ...p, adresse: e.target.value }));
+                  }}
                   className="w-full bg-[#F9F6F1] border border-[#E6D9C8] focus:border-[#8A5C38] focus:bg-white rounded-xl px-3.5 py-3 text-sm text-[#1C1008] outline-none transition-all"
                 />
               </div>
