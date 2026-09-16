@@ -1,4 +1,12 @@
 import { useState, useEffect, useRef } from "react";
+import {
+  initMetaPixel,
+  trackPageView,
+  trackViewContent,
+  trackInitiateCheckout,
+  trackLead,
+  trackContact,
+} from "./lib/pixel";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CONFIG & WHATSAPP LINK GENERATOR
@@ -200,7 +208,34 @@ export default function App() {
   const cityDropdownRef = useRef<HTMLDivElement>(null);
   const orderFormRef = useRef<HTMLDivElement>(null);
 
-  // Auto-hide sticky bar when the order form enters the screen
+  // Meta Pixel tracking deduplication refs
+  const pixelInitializedRef = useRef(false);
+  const viewContentTrackedRef = useRef(false);
+  const initiateCheckoutTrackedRef = useRef(false);
+
+  // 1. Meta Pixel: Initialize & Track PageView on mount
+  useEffect(() => {
+    if (!pixelInitializedRef.current) {
+      initMetaPixel();
+      trackPageView();
+      pixelInitializedRef.current = true;
+    }
+  }, []);
+
+  // 2. Meta Pixel: Track ViewContent when Hero / Product is viewed
+  useEffect(() => {
+    if (!viewContentTrackedRef.current) {
+      trackViewContent({
+        content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
+        content_category: "Mobilier",
+        value: 249,
+        currency: "MAD",
+      });
+      viewContentTrackedRef.current = true;
+    }
+  }, []);
+
+  // Auto-hide sticky bar when the order form enters the screen & track checkout initiation
   useEffect(() => {
     const target = orderFormRef.current;
     if (!target) return;
@@ -208,6 +243,15 @@ export default function App() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsFormVisible(entry.isIntersecting);
+        if (entry.isIntersecting && !initiateCheckoutTrackedRef.current) {
+          trackInitiateCheckout({
+            content_name: "Table d'Appoint Mode Trend",
+            value: 249,
+            currency: "MAD",
+            num_items: 1,
+          });
+          initiateCheckoutTrackedRef.current = true;
+        }
       },
       { threshold: 0.05 }
     );
@@ -236,24 +280,57 @@ export default function App() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // 3. Meta Pixel: Trigger InitiateCheckout when user initiates purchase action
+  const triggerInitiateCheckout = (qty?: number) => {
+    if (!initiateCheckoutTrackedRef.current) {
+      const selectedQty = qty || form.quantite;
+      const s = getOrderSummary(selectedQty);
+      trackInitiateCheckout({
+        content_name: "Table d'Appoint Mode Trend",
+        value: s.price,
+        currency: "MAD",
+        num_items: selectedQty,
+      });
+      initiateCheckoutTrackedRef.current = true;
+    }
+  };
+
   const scrollToOrder = (qtyChoice?: number) => {
     if (qtyChoice) {
       setForm((prev) => ({ ...prev, quantite: qtyChoice }));
     }
+    triggerInitiateCheckout(qtyChoice);
     const el = document.getElementById("order-form-section");
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  // 4. Meta Pixel: Track Lead on form submission (NO Purchase event sent)
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
     if (!form.nom.trim() || !form.telephone.trim() || !form.ville.trim() || !form.adresse.trim()) {
       return;
     }
+
+    const currentSummary = getOrderSummary(form.quantite);
+    trackLead({
+      content_name: "Table d'Appoint Mode Trend",
+      value: currentSummary.price,
+      currency: "MAD",
+      quantity: form.quantite,
+    });
+
     const url = generateWhatsAppLink(form);
     window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  // 5. Meta Pixel: Track Contact on direct WhatsApp support click
+  const handleDirectWhatsAppContact = () => {
+    trackContact("WhatsApp");
+    const text = "Bonjour Mode Trend Maroc, je souhaite avoir des informations sur la table d'appoint.";
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
   const summary = getOrderSummary(form.quantite);
@@ -825,7 +902,10 @@ export default function App() {
             
             {/* Pack 1 — Standard */}
             <div
-              onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
+              onClick={() => {
+                setForm((p) => ({ ...p, quantite: 1 }));
+                triggerInitiateCheckout(1);
+              }}
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 1
                   ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/15"
@@ -858,7 +938,10 @@ export default function App() {
 
             {/* Pack 2 (Duo) — VISUELLEMENT DOMINANT */}
             <div
-              onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
+              onClick={() => {
+                setForm((p) => ({ ...p, quantite: 2 }));
+                triggerInitiateCheckout(2);
+              }}
               className={`relative p-5 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 2
                   ? "bg-white border-[#8A5C38] shadow-xl ring-2 ring-[#8A5C38]/20"
@@ -900,7 +983,10 @@ export default function App() {
 
             {/* Pack 3 (Family) */}
             <div
-              onClick={() => setForm((p) => ({ ...p, quantite: 3 }))}
+              onClick={() => {
+                setForm((p) => ({ ...p, quantite: 3 }));
+                triggerInitiateCheckout(3);
+              }}
               className={`p-4 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between ${
                 form.quantite === 3
                   ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/15"
@@ -1159,6 +1245,20 @@ export default function App() {
                 </div>
               );
             })}
+          </div>
+
+          {/* Direct Contact Support Button (triggers Contact event) */}
+          <div className="mt-8 text-center bg-[#FAF6F0] p-4 rounded-2xl border border-[#E6D9C8]">
+            <p className="text-xs font-semibold text-[#5C3A1C] mb-2.5">
+              Une question avant de passer commande ? Notre équipe vous répond directement.
+            </p>
+            <button
+              onClick={handleDirectWhatsAppContact}
+              className="inline-flex items-center gap-2 text-xs font-bold text-[#128C4F] bg-[#128C4F]/10 hover:bg-[#128C4F]/20 active:scale-95 px-5 py-2.5 rounded-full transition-all cursor-pointer"
+            >
+              <IconWhatsApp size={17} />
+              <span>Poser une question sur WhatsApp</span>
+            </button>
           </div>
 
         </div>
