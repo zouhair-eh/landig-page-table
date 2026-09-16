@@ -567,11 +567,11 @@ export default function App() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             
             {/* Card 1: Lit & PC */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_bed_laptop.jpg"
                   alt="Table Mode Trend au lit avec ordinateur"
@@ -579,10 +579,10 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-3.5">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Chambre & Confort</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Au lit & Télétravail</h3>
-                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+              <div className="p-3 sm:p-3.5">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Chambre & Confort</span>
+                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Au lit & Télétravail</h3>
+                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
                   Glisse sous le cadre du lit pour soutenir confortablement votre PC portable, livre et café.
                 </p>
               </div>
@@ -590,7 +590,7 @@ export default function App() {
 
             {/* Card 2: Tablette & Salon */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_tablet_relax.jpg"
                   alt="Table Mode Trend avec tablette et smartphone"
@@ -598,10 +598,10 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-3.5">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Salon & Détente</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Depuis le fauteuil</h3>
-                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+              <div className="p-3 sm:p-3.5">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Salon & Détente</span>
+                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Depuis le fauteuil</h3>
+                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
                   Support stable pour regarder vos séries sur tablette, poser votre boisson ou prendre un encas.
                 </p>
               </div>
@@ -609,7 +609,7 @@ export default function App() {
 
             {/* Card 3: Multi-usages 180° */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_tilt_multipurpose.jpg"
                   alt="Table Mode Trend inclinaison 0 à 180 degrés"
@@ -617,10 +617,10 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-3.5">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Polyvalence 0° - 180°</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Multi-usages & Pupitre</h3>
-                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+              <div className="p-3 sm:p-3.5">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Polyvalence 0° - 180°</span>
+                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Multi-usages & Pupitre</h3>
+                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
                   Plateau inclinable avec réglette d'arrêt pour lecture, dessin, repas ou support de partitions.
                 </p>
               </div>
@@ -628,7 +628,7 @@ export default function App() {
 
             {/* Card 4: Réglages & Détails */}
             <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-36 sm:h-40 overflow-hidden bg-[#FAF6F0]">
+              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/use_structure_details.jpg"
                   alt="Table Mode Trend détails de réglage et rotation"
@@ -636,10 +636,10 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-3.5">
-                <span className="text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Finition & Réglages</span>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-0.5">Hauteur & Rangement</h3>
-                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+              <div className="p-3 sm:p-3.5">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Finition & Réglages</span>
+                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Hauteur & Rangement</h3>
+                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
                   Molette rotative pour ajuster la hauteur en douceur et plateau rabattable pour un gain de place.
                 </p>
               </div>
