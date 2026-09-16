@@ -138,41 +138,51 @@ function IconPhoneCall({ size = 20, className = "" }: { size?: number; className
   );
 }
 
-function IconHeight({ size = 20, className = "" }: { size?: number; className?: string }) {
+function IconHeight({ size = 22, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <polyline points="7 6 12 1 17 6" />
-      <polyline points="7 18 12 23 17 18" />
-      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M12 3v18" />
+      <path d="M8 6l4-3 4 3" />
+      <path d="M8 18l4 3 4-3" />
+      <path d="M3 12h18" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.6" />
     </svg>
   );
 }
 
-function IconTilt({ size = 20, className = "" }: { size?: number; className?: string }) {
+function IconTilt({ size = 22, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-      <line x1="12" y1="22.08" x2="12" y2="12" />
+      <path d="M3 20h18" strokeWidth="2.5" />
+      <path d="M5 19L19 9" strokeWidth="2.5" />
+      <path d="M16 6l4 3-2 3" strokeWidth="1.5" fill="currentColor" fillOpacity="0.2" />
+      <path d="M12 19a7 7 0 0 0 6-7" strokeWidth="1.5" strokeDasharray="2 2" />
     </svg>
   );
 }
 
-function IconBase({ size = 20, className = "" }: { size?: number; className?: string }) {
+function IconBase({ size = 22, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect x="2" y="18" width="20" height="4" rx="1" />
-      <line x1="12" y1="2" x2="12" y2="18" />
-      <line x1="6" y1="6" x2="18" y2="6" />
+      {/* Table top */}
+      <rect x="4" y="4" width="16" height="3" rx="1.5" fill="currentColor" fillOpacity="0.15" />
+      <rect x="4" y="4" width="16" height="3" rx="1.5" />
+      {/* Offset leg on right */}
+      <line x1="16" y1="7" x2="16" y2="18" />
+      {/* Ultra flat sliding base */}
+      <rect x="2" y="18" width="20" height="3.5" rx="1.75" fill="currentColor" fillOpacity="0.25" />
+      <rect x="2" y="18" width="20" height="3.5" rx="1.75" strokeWidth="1.75" />
     </svg>
   );
 }
 
-function IconComfort({ size = 20, className = "" }: { size?: number; className?: string }) {
+function IconComfort({ size = 22, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-      <path d="M21 19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1h18v1z" />
+      <path d="M4 11a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6H4v-6z" />
+      <path d="M6 9V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3" />
+      <path d="M4 17v3" />
+      <path d="M20 17v3" />
+      <circle cx="12" cy="13" r="1.5" fill="currentColor" />
     </svg>
   );
 }
@@ -576,48 +586,48 @@ export default function App() {
           {/* 4 Clean Benefit Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
             
-            <div className="bg-[#F9F6F1] p-4 rounded-2xl border border-[#E6D9C8] flex flex-col justify-between">
+            <div className="group bg-white p-5 rounded-2xl border border-[#E6D9C8] hover:border-[#8A5C38] shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center mb-3">
-                  <IconHeight size={20} />
+                <div className="w-12 h-12 rounded-2xl bg-[#8A5C38]/10 text-[#8A5C38] group-hover:bg-[#8A5C38] group-hover:text-white flex items-center justify-center mb-3.5 transition-all duration-300 shadow-xs ring-1 ring-[#8A5C38]/20 group-hover:ring-[#8A5C38] group-hover:scale-105">
+                  <IconHeight size={22} />
                 </div>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Hauteur réglable</h3>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">Hauteur réglable</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Ajustable de 65 à 90 cm pour s'aligner exactement avec votre canapé, lit ou fauteuil.
                 </p>
               </div>
             </div>
 
-            <div className="bg-[#F9F6F1] p-4 rounded-2xl border border-[#E6D9C8] flex flex-col justify-between">
+            <div className="group bg-white p-5 rounded-2xl border border-[#E6D9C8] hover:border-[#8A5C38] shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center mb-3">
-                  <IconTilt size={20} />
+                <div className="w-12 h-12 rounded-2xl bg-[#8A5C38]/10 text-[#8A5C38] group-hover:bg-[#8A5C38] group-hover:text-white flex items-center justify-center mb-3.5 transition-all duration-300 shadow-xs ring-1 ring-[#8A5C38]/20 group-hover:ring-[#8A5C38] group-hover:scale-105">
+                  <IconTilt size={22} />
                 </div>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Plateau inclinable</h3>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">Plateau inclinable</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Angle réglable avec réglette d'arrêt pour lire ou taper au clavier sans risque de glisse.
                 </p>
               </div>
             </div>
 
-            <div className="bg-[#F9F6F1] p-4 rounded-2xl border border-[#E6D9C8] flex flex-col justify-between">
+            <div className="group bg-white p-5 rounded-2xl border border-[#E6D9C8] hover:border-[#8A5C38] shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center mb-3">
-                  <IconBase size={20} />
+                <div className="w-12 h-12 rounded-2xl bg-[#8A5C38]/10 text-[#8A5C38] group-hover:bg-[#8A5C38] group-hover:text-white flex items-center justify-center mb-3.5 transition-all duration-300 shadow-xs ring-1 ring-[#8A5C38]/20 group-hover:ring-[#8A5C38] group-hover:scale-105">
+                  <IconBase size={22} />
                 </div>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Base ultra-plate & stable</h3>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">Base ultra-plate & stable</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Socle fin en métal noir qui glisse sous vos meubles les plus bas sans encombrer la pièce.
                 </p>
               </div>
             </div>
 
-            <div className="bg-[#F9F6F1] p-4 rounded-2xl border border-[#E6D9C8] flex flex-col justify-between">
+            <div className="group bg-white p-5 rounded-2xl border border-[#E6D9C8] hover:border-[#128C4F] shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
               <div>
-                <div className="w-10 h-10 rounded-xl bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center mb-3">
-                  <IconComfort size={20} />
+                <div className="w-12 h-12 rounded-2xl bg-[#128C4F]/10 text-[#128C4F] group-hover:bg-[#128C4F] group-hover:text-white flex items-center justify-center mb-3.5 transition-all duration-300 shadow-xs ring-1 ring-[#128C4F]/20 group-hover:ring-[#128C4F] group-hover:scale-105">
+                  <IconComfort size={22} />
                 </div>
-                <h3 className="font-bold text-sm text-[#1C1008] mb-1">Multi-usages quotidien</h3>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5 group-hover:text-[#128C4F] transition-colors">Multi-usages quotidien</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
                   Parfaite pour le canapé, le lit, le télétravail, la lecture ou pour prendre un repas.
                 </p>
@@ -799,11 +809,14 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[960px] mx-auto">
 
             {/* Testimonial 1 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
-                  S
-                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&h=120&q=80"
+                  alt="Sara avis client"
+                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
+                  loading="lazy"
+                />
                 <div>
                   <p className="font-bold text-sm text-[#1C1008] leading-tight">Sara</p>
                   <p className="text-[10px] text-[#5C3A1C]">📍 Casablanca</p>
@@ -824,11 +837,14 @@ export default function App() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
-                  Y
-                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&h=120&q=80"
+                  alt="Youssef avis client"
+                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
+                  loading="lazy"
+                />
                 <div>
                   <p className="font-bold text-sm text-[#1C1008] leading-tight">Youssef</p>
                   <p className="text-[10px] text-[#5C3A1C]">📍 Rabat</p>
@@ -849,11 +865,14 @@ export default function App() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
-                  I
-                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&h=120&q=80"
+                  alt="Imane avis client"
+                  className="w-11 h-11 rounded-full object-cover border-2 border-[#8A5C38]/30 shadow-xs shrink-0"
+                  loading="lazy"
+                />
                 <div>
                   <p className="font-bold text-sm text-[#1C1008] leading-tight">Imane</p>
                   <p className="text-[10px] text-[#5C3A1C]">📍 Marrakech</p>
