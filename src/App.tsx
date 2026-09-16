@@ -570,12 +570,12 @@ export default function App() {
           <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             
             {/* Card 1: Lit & PC */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
+            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
+              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
                 <img
                   src="/images/use_bed_laptop.jpg"
                   alt="Table Mode Trend au lit avec ordinateur"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>
@@ -589,12 +589,12 @@ export default function App() {
             </div>
 
             {/* Card 2: Tablette & Salon */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
+            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
+              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
                 <img
                   src="/images/use_tablet_relax.jpg"
                   alt="Table Mode Trend avec tablette et smartphone"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>
@@ -608,12 +608,12 @@ export default function App() {
             </div>
 
             {/* Card 3: Multi-usages 180° */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
+            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
+              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
                 <img
                   src="/images/use_tilt_multipurpose.jpg"
                   alt="Table Mode Trend inclinaison 0 à 180 degrés"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>
@@ -627,12 +627,12 @@ export default function App() {
             </div>
 
             {/* Card 4: Réglages & Détails */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs group hover:shadow-md transition-all">
-              <div className="h-48 sm:h-52 lg:h-56 overflow-hidden bg-[#FAF6F0]">
+            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
+              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
                 <img
                   src="/images/use_structure_details.jpg"
                   alt="Table Mode Trend détails de réglage et rotation"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-contain"
                   loading="lazy"
                 />
               </div>
