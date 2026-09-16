@@ -12,7 +12,7 @@ declare global {
 }
 
 // Pixel ID configuré (Remplacez par votre Pixel ID réel ici ou dans un fichier .env avec VITE_META_PIXEL_ID)
-export const DEFAULT_META_PIXEL_ID = "YOUR_PIXEL_ID";
+export const DEFAULT_META_PIXEL_ID = "1686363418579842";
 export const META_PIXEL_ID =
   (typeof import.meta !== "undefined" && import.meta.env?.VITE_META_PIXEL_ID) ||
   DEFAULT_META_PIXEL_ID;
