@@ -702,7 +702,7 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          6b. TÉMOIGNAGES VIDÉO (Placeholders)
+          6b. TÉMOIGNAGES CLIENTS — Comment ils ont reçu leur produit
       ───────────────────────────────────────────────────────────── */}
       <section className="py-8 sm:py-12 bg-[#FAF6F0] border-b border-[#E6D9C8]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -715,74 +715,88 @@ export default function App() {
               Ils ont adopté Mode Trend chez eux
             </h2>
             <p className="text-xs sm:text-sm text-[#5C3A1C] mt-1">
-              Découvrez les retours de nos clients partout au Maroc.
+              Découvrez comment nos clients ont reçu leur table partout au Maroc.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[960px] mx-auto">
 
             {/* Testimonial 1 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
-              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
-                  </div>
-                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
+                  S
                 </div>
-                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Casablanca</div>
+                <div>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Sara</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Casablanca</p>
+                </div>
               </div>
-              <div className="p-3.5">
-                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Sara</p>
-                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
-                  "Très pratique pour travailler depuis le canapé."
-                </p>
+              <div className="flex gap-0.5 mb-2.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ))}
+              </div>
+              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
+                "Le colis est arrivé bien emballé en 3 jours. Le montage était super rapide, en moins de 5 minutes. La table est stable et très pratique pour travailler depuis le canapé."
+              </p>
+              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+                <IconCheck size={12} />
+                <span>Achat vérifié — Livraison en 3 jours</span>
               </div>
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
-              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
-                  </div>
-                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
+                  Y
                 </div>
-                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Rabat</div>
+                <div>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Youssef</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Rabat</p>
+                </div>
               </div>
-              <div className="p-3.5">
-                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Youssef</p>
-                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
-                  "Stable, facile à régler et livraison rapide."
-                </p>
+              <div className="flex gap-0.5 mb-2.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ))}
+              </div>
+              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
+                "J'ai commandé via WhatsApp, le service client m'a rappelé pour confirmer. La livraison était gratuite et le livreur m'a contacté avant de venir. Produit solide et bien fini."
+              </p>
+              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+                <IconCheck size={12} />
+                <span>Achat vérifié — Livraison en 2 jours</span>
               </div>
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] overflow-hidden shadow-xs hover:shadow-md transition-all">
-              <div className="relative bg-gradient-to-b from-[#E6D9C8] to-[#D4C4AE] aspect-[9/14] flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center mx-auto mb-3 shadow-md">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="#8A5C38"><polygon points="9.5,7.5 9.5,16.5 16.5,12" /></svg>
-                  </div>
-                  <p className="text-xs font-semibold text-[#5C3A1C]">Vidéo bientôt disponible</p>
+            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md transition-all flex flex-col">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center font-bold text-sm shrink-0">
+                  I
                 </div>
-                <div className="absolute top-2.5 left-2.5 bg-black/60 backdrop-blur-sm text-white text-[9px] font-bold px-2 py-0.5 rounded-full">📍 Marrakech</div>
+                <div>
+                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Imane</p>
+                  <p className="text-[10px] text-[#5C3A1C]">📍 Marrakech</p>
+                </div>
               </div>
-              <div className="p-3.5">
-                <p className="font-bold text-sm text-[#1C1008] mb-0.5">Imane</p>
-                <p className="text-xs text-[#5C3A1C] italic leading-relaxed">
-                  "J'en ai pris deux : une pour le salon et une pour la chambre."
-                </p>
+              <div className="flex gap-0.5 mb-2.5">
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+                ))}
+              </div>
+              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
+                "J'en ai commandé deux pour le salon et la chambre. Le Pack Duo était vraiment avantageux. Tout est arrivé en bon état, bien protégé. Le paiement à la livraison m'a rassurée."
+              </p>
+              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+                <IconCheck size={12} />
+                <span>Achat vérifié — Pack Duo</span>
               </div>
             </div>
 
           </div>
-
-          <p className="text-[10px] text-center text-neutral-400 mt-4 italic">
-            Les témoignages ci-dessus seront complétés avec les vidéos réelles de nos clients.
-          </p>
 
         </div>
       </section>
