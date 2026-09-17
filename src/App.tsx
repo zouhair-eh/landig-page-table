@@ -1462,27 +1462,27 @@ export default function App() {
           11. MOBILE STICKY BOTTOM BAR (Auto-hides when form is in view)
       ───────────────────────────────────────────────────────────── */}
       {showStickyBar && !isFormVisible && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#E6D9C8] p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-2xl z-40 flex items-center justify-between gap-3 animate-fadeIn">
-          <div>
-            <span className="text-[10px] font-bold text-[#8A5C38] uppercase block leading-none">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-t border-[#E6D9C8] px-3.5 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] shadow-2xl z-50 flex items-center justify-between gap-2.5 animate-fadeIn">
+          <div className="shrink-0">
+            <span className="text-[9px] font-bold text-[#8A5C38] uppercase block leading-none">
               Livraison Gratuite
             </span>
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-xl font-black text-[#1C1008]">
+            <div className="flex items-baseline gap-1 mt-0.5">
+              <span className="font-serif text-lg font-black text-[#1C1008]">
                 {summary.price} DH
               </span>
-              <span className="text-[10px] text-neutral-500 font-medium">
+              <span className="text-[10px] text-neutral-500 font-semibold">
                 ({form.quantite} {form.quantite > 1 ? "tables" : "table"})
               </span>
             </div>
           </div>
 
           <button
-            onClick={() => scrollToOrder()}
-            className="min-h-[46px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center gap-1.5 shadow-md shadow-[#25D366]/25 transition-all cursor-pointer"
+            onClick={() => scrollToOrder(form.quantite)}
+            className="flex-1 min-h-[44px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-[#25D366]/25 transition-all cursor-pointer whitespace-nowrap"
           >
             <IconWhatsApp size={16} />
-            <span>Commander — Paiement à la livraison</span>
+            <span>Commander — {summary.price} DH</span>
           </button>
         </div>
       )}
