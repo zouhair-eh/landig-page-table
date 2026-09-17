@@ -212,7 +212,7 @@ export default function App() {
     telephone: "",
     ville: "",
     adresse: "",
-    quantite: 2,
+    quantite: 1,
   });
 
   const cityDropdownRef = useRef<HTMLDivElement>(null);
@@ -518,12 +518,21 @@ export default function App() {
 
               {/* Headline */}
               <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1C1008] leading-tight mb-2">
-                Travaillez, mangez et détendez-vous confortablement avec Mode Trend.
+                La table d’appoint réglable qui s’adapte à votre canapé, votre lit et votre quotidien.
               </h1>
 
-              {/* Short Value Proposition */}
-              <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed mb-3.5">
-                Une table d'appoint ingénieuse avec hauteur réglable (50 à 60 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
+              {/* Subheadline */}
+              <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed mb-2">
+                Travaillez, mangez, lisez ou détendez-vous confortablement grâce à sa hauteur réglable, son plateau inclinable et sa base ultra-plate.
+              </p>
+
+              {/* Offer highlight directly below */}
+              <p className="text-xs sm:text-sm font-bold text-[#8A5C38] mb-3.5 flex items-center flex-wrap gap-1.5">
+                <span>À partir de 249 DH</span>
+                <span>•</span>
+                <span className="text-[#128C4F]">Livraison gratuite</span>
+                <span>•</span>
+                <span>Paiement à la livraison</span>
               </p>
 
               {/* Price & Offer Box (ON TOP) */}
@@ -532,7 +541,7 @@ export default function App() {
                   <div>
                     <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
                       {form.quantite === 1
-                        ? "Offre de lancement"
+                        ? "1 Table Mode Trend"
                         : form.quantite === 2
                         ? "Pack 2 Tables (Duo)"
                         : "Pack 3 Tables (Famille)"}
@@ -567,7 +576,7 @@ export default function App() {
                 <div className="bg-gradient-to-r from-[#8A5C38]/10 to-[#128C4F]/10 rounded-xl px-3 py-2 text-center">
                   <p className="text-[11px] sm:text-xs font-bold text-[#1C1008]">
                     {form.quantite === 1
-                      ? "🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc"
+                      ? "🎉 1 TABLE — 249 DH avec livraison gratuite partout au Maroc"
                       : form.quantite === 2
                       ? "🎉 PACK DUO — Économisez 99 DH + Livraison gratuite sur les 2 tables"
                       : "🎉 PACK FAMILLE — Économisez 178 DH + Livraison gratuite sur les 3 tables"}
@@ -589,7 +598,7 @@ export default function App() {
 
                 <div className="grid grid-cols-3 gap-2 sm:gap-2.5 pt-2">
                   
-                  {/* Option 1: 1 Table */}
+                  {/* Option 1: 1 Table — Default selected */}
                   <button
                     type="button"
                     onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
@@ -612,24 +621,24 @@ export default function App() {
                     </span>
                   </button>
 
-                  {/* Option 2: 2 Tables (Duo) — DOMINANT / LE PLUS CHOISI */}
+                  {/* Option 2: 2 Tables (Duo) — VISUALLY HIGHLIGHTED (LE PLUS CHOISI / MEILLEURE VALEUR) */}
                   <button
                     type="button"
                     onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
                     className={`relative p-2.5 sm:p-3 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between text-left ${
                       form.quantite === 2
                         ? "bg-white border-[#8A5C38] shadow-lg ring-2 ring-[#8A5C38]/30 scale-[1.02]"
-                        : "bg-white border-[#8A5C38]/40 hover:border-[#8A5C38] shadow-xs"
+                        : "bg-white border-[#8A5C38]/50 hover:border-[#8A5C38] shadow-xs"
                     }`}
                   >
-                    {/* Badge Le plus choisi */}
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8A5C38] text-white text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                    {/* Badge Le plus choisi / Meilleure valeur */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8A5C38] text-white text-[8px] sm:text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-md whitespace-nowrap">
                       ★ Le plus choisi
                     </div>
 
                     <div className="pt-0.5">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] sm:text-xs font-black text-[#8A5C38] leading-tight">
+                        <span className={`text-[11px] sm:text-xs font-bold leading-tight ${form.quantite === 2 ? "text-[#8A5C38]" : "text-[#1C1008]"}`}>
                           Pack Duo (2)
                         </span>
                         <span className="text-[9px] font-bold text-white bg-[#128C4F] px-1.5 py-0.2 rounded-full">
@@ -692,7 +701,7 @@ export default function App() {
                 className="w-full min-h-[54px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-3.5 px-5 rounded-2xl font-bold text-base shadow-md shadow-[#25D366]/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
                 <IconWhatsApp size={22} />
-                <span>Commander maintenant — Paiement à la livraison</span>
+                <span>Commander — {summary.price} DH (Paiement à la livraison)</span>
               </button>
 
               <p className="text-[11px] text-center text-[#5C3A1C] mt-2">
@@ -1290,33 +1299,78 @@ export default function App() {
 
             <form onSubmit={handleOrderSubmit} className="space-y-3.5">
               
-              {/* Quantity selector (+ / -) */}
+              {/* Formula & Pack Selector (Crystal Clear - No Confusion) */}
               <div>
-                <label className="block text-xs font-bold text-[#1C1008] mb-1">
-                  Quantité commandée :
-                </label>
-                <div className="flex items-center justify-between bg-[#F9F6F1] border border-[#E6D9C8] rounded-xl p-2.5">
-                  <span className="text-xs font-bold text-[#5C3A1C]">
-                    {summary.label}
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-bold text-[#1C1008]">
+                    Formule sélectionnée :
+                  </label>
+                  <span className="text-[11px] font-bold text-[#128C4F]">
+                    ✓ Livraison Gratuite
                   </span>
-                  <div className="flex items-center gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setForm((p) => ({ ...p, quantite: Math.max(1, p.quantite - 1) }))}
-                      className="w-8 h-8 rounded-lg bg-white border border-[#E6D9C8] font-bold text-[#1C1008] flex items-center justify-center hover:bg-neutral-100 active:scale-95 cursor-pointer"
-                      aria-label="Diminuer la quantité"
-                    >
-                      -
-                    </button>
-                    <span className="font-bold text-sm w-6 text-center">{form.quantite}</span>
-                    <button
-                      type="button"
-                      onClick={() => setForm((p) => ({ ...p, quantite: p.quantite + 1 }))}
-                      className="w-8 h-8 rounded-lg bg-white border border-[#E6D9C8] font-bold text-[#1C1008] flex items-center justify-center hover:bg-neutral-100 active:scale-95 cursor-pointer"
-                      aria-label="Augmenter la quantité"
-                    >
-                      +
-                    </button>
+                </div>
+
+                {/* 3 Quick Formula Buttons */}
+                <div className="grid grid-cols-3 gap-2 mb-2">
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
+                    className={`py-2 px-1.5 rounded-xl border-2 text-center transition-all cursor-pointer ${
+                      form.quantite === 1
+                        ? "bg-[#8A5C38] text-white border-[#8A5C38] shadow-sm font-bold"
+                        : "bg-[#F9F6F1] text-[#1C1008] border-[#E6D9C8] hover:border-[#8A5C38]/50 text-xs"
+                    }`}
+                  >
+                    <span className="text-[11px] block leading-tight">1 Table</span>
+                    <span className="text-xs font-extrabold block mt-0.5">249 DH</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
+                    className={`relative py-2 px-1.5 rounded-xl border-2 text-center transition-all cursor-pointer ${
+                      form.quantite === 2
+                        ? "bg-[#8A5C38] text-white border-[#8A5C38] shadow-md font-bold"
+                        : "bg-[#F9F6F1] text-[#1C1008] border-[#8A5C38]/40 hover:border-[#8A5C38] text-xs"
+                    }`}
+                  >
+                    <span className="text-[11px] block leading-tight">Pack Duo (2)</span>
+                    <span className="text-xs font-extrabold block mt-0.5">399 DH</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 3 }))}
+                    className={`py-2 px-1.5 rounded-xl border-2 text-center transition-all cursor-pointer ${
+                      form.quantite === 3
+                        ? "bg-[#8A5C38] text-white border-[#8A5C38] shadow-sm font-bold"
+                        : "bg-[#F9F6F1] text-[#1C1008] border-[#E6D9C8] hover:border-[#8A5C38]/50 text-xs"
+                    }`}
+                  >
+                    <span className="text-[11px] block leading-tight">Pack 3 Tables</span>
+                    <span className="text-xs font-extrabold block mt-0.5">569 DH</span>
+                  </button>
+                </div>
+
+                {/* Clear breakdown card (Prevents "2 packs" confusion) */}
+                <div className="bg-[#FAF6F0] border border-[#E6D9C8] rounded-xl p-2.5 flex items-center justify-between text-xs">
+                  <div>
+                    <span className="text-[10px] uppercase font-bold text-[#8A5C38] block">
+                      Détail de votre sélection
+                    </span>
+                    <p className="font-bold text-[#1C1008]">
+                      {form.quantite === 1
+                        ? "1 Table individuelle"
+                        : form.quantite === 2
+                        ? "Pack Duo — 2 tables"
+                        : "Pack Famille — 3 tables"}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[10px] text-neutral-500 font-semibold block">Total de tables</span>
+                    <span className="inline-block bg-[#8A5C38]/10 text-[#8A5C38] px-2 py-0.5 rounded-full font-extrabold text-xs">
+                      {form.quantite} {form.quantite > 1 ? "tables" : "table"}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1437,19 +1491,23 @@ export default function App() {
               {/* Pricing Recap Box */}
               <div className="bg-[#FAF6F0] rounded-2xl p-3.5 border border-[#E6D9C8] space-y-1.5 text-xs">
                 <div className="flex justify-between text-neutral-600">
-                  <span>Formule :</span>
+                  <span>Formule choisie :</span>
                   <span className="font-semibold text-[#1C1008]">{summary.label}</span>
                 </div>
                 <div className="flex justify-between text-neutral-600">
+                  <span>Total de tables :</span>
+                  <span className="font-semibold text-[#1C1008]">{form.quantite} {form.quantite > 1 ? "tables" : "table"}</span>
+                </div>
+                <div className="flex justify-between text-neutral-600">
                   <span>Livraison :</span>
-                  <span className="font-bold text-[#128C4F]">Gratuite (0 DH)</span>
+                  <span className="font-bold text-[#128C4F]">Gratuite partout au Maroc (0 DH)</span>
                 </div>
                 <div className="flex justify-between text-neutral-600">
                   <span>Paiement :</span>
-                  <span className="font-semibold text-[#1C1008]">À la livraison (espèces)</span>
+                  <span className="font-semibold text-[#1C1008]">À la livraison (espèces au livreur)</span>
                 </div>
                 <div className="pt-2 border-t border-[#E6D9C8] flex justify-between items-baseline font-bold">
-                  <span className="text-xs text-[#1C1008]">Total à régler :</span>
+                  <span className="text-xs text-[#1C1008]">Total à régler à la livraison :</span>
                   <span className="font-serif text-2xl text-[#8A5C38]">{summary.price} DH</span>
                 </div>
               </div>
@@ -1460,7 +1518,7 @@ export default function App() {
                 className="w-full min-h-[54px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-3.5 px-5 rounded-2xl font-bold text-base shadow-lg shadow-[#25D366]/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
                 <IconWhatsApp size={22} />
-                <span>Finaliser ma commande sur WhatsApp</span>
+                <span>Commander — {summary.price} DH (Paiement à la livraison)</span>
               </button>
 
               {/* Clarification text */}
@@ -1551,14 +1609,14 @@ export default function App() {
             Commandez votre table Mode Trend aujourd'hui
           </h2>
           <p className="text-sm font-bold text-[#128C4F] mb-5">
-            249 DH — Livraison gratuite
+            {summary.price} DH ({form.quantite} {form.quantite > 1 ? "tables" : "table"}) — Livraison gratuite
           </p>
           <button
-            onClick={() => scrollToOrder()}
+            onClick={() => scrollToOrder(form.quantite)}
             className="w-full sm:w-auto min-h-[52px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-base py-3.5 px-8 rounded-2xl shadow-lg shadow-[#25D366]/25 inline-flex items-center justify-center gap-2 transition-all cursor-pointer"
           >
             <IconWhatsApp size={20} />
-            <span>Commander maintenant</span>
+            <span>Commander — {summary.price} DH</span>
           </button>
         </div>
       </section>
@@ -1582,7 +1640,7 @@ export default function App() {
           11. MOBILE STICKY BOTTOM BAR (Auto-hides when form is in view)
       ───────────────────────────────────────────────────────────── */}
       {showStickyBar && !isFormVisible && (
-        <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-t border-[#E6D9C8] px-3.5 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] shadow-2xl z-50 flex items-center justify-between gap-2.5 animate-fadeIn">
+        <div className="md:hidden fixed bottom-0 left-0 right-0 w-full bg-white/95 backdrop-blur-md border-t border-[#E6D9C8] px-3.5 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] shadow-2xl z-50 flex items-center justify-between gap-2 animate-fadeIn">
           <div className="shrink-0">
             <span className="text-[9px] font-bold text-[#8A5C38] uppercase block leading-none">
               Livraison Gratuite
@@ -1591,8 +1649,8 @@ export default function App() {
               <span className="font-serif text-lg font-black text-[#1C1008]">
                 {summary.price} DH
               </span>
-              <span className="text-[10px] text-neutral-500 font-semibold">
-                ({form.quantite} {form.quantite > 1 ? "tables" : "table"})
+              <span className="text-[10px] text-[#5C3A1C] font-semibold">
+                ({form.quantite === 1 ? "1 table" : form.quantite === 2 ? "Duo" : "3 tables"})
               </span>
             </div>
           </div>
@@ -1602,7 +1660,7 @@ export default function App() {
             className="flex-1 min-h-[44px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-[#25D366]/25 transition-all cursor-pointer whitespace-nowrap"
           >
             <IconWhatsApp size={16} />
-            <span>Commander — {summary.price} DH</span>
+            <span>{summary.price} DH — {form.quantite} {form.quantite > 1 ? "tables" : "table"} | Commander</span>
           </button>
         </div>
       )}
