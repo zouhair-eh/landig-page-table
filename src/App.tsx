@@ -979,8 +979,8 @@ export default function App() {
                 <div className="lg:col-span-7 order-1 lg:order-2">
                   <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
                     <img
-                      src="/images/exact_sofa.jpg"
-                      alt="Glisse parfaitement sous le lit et le canapé"
+                      src="/images/lifestyle_sofa_cozy_living.png"
+                      alt="Moment détente et travail sur le canapé avec la table Mode Trend"
                       className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                       loading="lazy"
                     />
