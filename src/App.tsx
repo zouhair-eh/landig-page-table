@@ -451,11 +451,11 @@ export default function App() {
           {/* Quick Action Button */}
           <div className="flex items-center gap-2">
             <button
-              onClick={() => scrollToOrder()}
+              onClick={() => scrollToOrder(form.quantite)}
               className="bg-[#25D366] hover:bg-[#20bd5a] active:scale-95 text-white font-bold text-xs sm:text-sm px-3.5 py-2 rounded-full shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
             >
               <IconWhatsApp size={16} />
-              <span>Commander — 249 DH</span>
+              <span>Commander — {summary.price} DH</span>
             </button>
           </div>
         </div>
@@ -526,34 +526,110 @@ export default function App() {
                 Une table d'appoint ingénieuse avec hauteur réglable (65 à 90 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
               </p>
 
+              {/* ── Compact & Premium Offer Selector (1 Table | 2 Tables | 3 Tables) ── */}
+              <div className="mb-2.5">
+                <div className="flex items-center justify-between mb-1.5 px-0.5">
+                  <span className="text-[11px] font-bold text-[#5C3A1C] uppercase tracking-wider">
+                    Choisir votre offre :
+                  </span>
+                  {form.quantite === 2 && (
+                    <span className="text-[10px] font-extrabold text-white bg-[#8A5C38] px-2 py-0.5 rounded-full shadow-xs">
+                      ★ Le plus choisi
+                    </span>
+                  )}
+                  {form.quantite === 3 && (
+                    <span className="text-[10px] font-bold text-[#128C4F] bg-[#128C4F]/10 px-2 py-0.5 rounded-full">
+                      Meilleur prix / table
+                    </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-3 gap-1.5 p-1 bg-[#FAF6F0] border border-[#E6D9C8] rounded-xl">
+                  {[
+                    { qty: 1, label: "1 Table", sub: "249 DH" },
+                    { qty: 2, label: "2 Tables", sub: "399 DH", pop: "-99 DH" },
+                    { qty: 3, label: "3 Tables", sub: "569 DH", pop: "-178 DH" },
+                  ].map((item) => {
+                    const isSelected = form.quantite === item.qty;
+                    return (
+                      <button
+                        key={item.qty}
+                        type="button"
+                        onClick={() => setForm((p) => ({ ...p, quantite: item.qty }))}
+                        className={`relative py-1.5 px-2 rounded-lg text-center transition-all cursor-pointer flex flex-col items-center justify-center ${
+                          isSelected
+                            ? "bg-white text-[#1C1008] border border-[#8A5C38] shadow-xs ring-1 ring-[#8A5C38]/20 font-bold"
+                            : "bg-transparent text-[#5C3A1C] hover:bg-white/60 border border-transparent"
+                        }`}
+                      >
+                        {item.pop && (
+                          <span
+                            className={`absolute -top-2 right-1 text-[8px] font-extrabold px-1 rounded-full ${
+                              isSelected
+                                ? "bg-[#128C4F] text-white shadow-xs"
+                                : "bg-[#128C4F]/15 text-[#128C4F]"
+                            }`}
+                          >
+                            {item.pop}
+                          </span>
+                        )}
+                        <span className={`text-xs ${isSelected ? "font-extrabold text-[#8A5C38]" : "font-semibold text-[#1C1008]"}`}>
+                          {item.label}
+                        </span>
+                        <span className="text-[10px] text-neutral-500 font-semibold leading-none mt-0.5">
+                          {item.sub}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Price & Offer Box */}
-              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-2 shadow-xs">
+              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-2 shadow-xs transition-all">
                 <div className="flex items-center justify-between mb-2">
                   <div>
                     <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
-                      Offre de lancement
+                      {form.quantite === 1
+                        ? "Offre de lancement"
+                        : form.quantite === 2
+                        ? "Pack 2 Tables (Duo)"
+                        : "Pack 3 Tables (Famille)"}
                     </span>
                     <div className="flex items-baseline gap-2 mt-0.5">
                       <span className="font-serif text-3xl sm:text-4xl font-black text-[#1C1008]">
-                        249 DH
+                        {summary.price} DH
                       </span>
                       <span className="text-sm text-neutral-400 line-through font-semibold">
-                        299 DH
+                        {form.quantite === 1 ? "299 DH" : form.quantite === 2 ? "498 DH" : "747 DH"}
                       </span>
                     </div>
+                    {form.quantite > 1 && (
+                      <span className="text-[11px] font-bold text-[#8A5C38] block mt-0.5">
+                        Soit {form.quantite === 2 ? "199,50" : "189,67"} DH / table
+                      </span>
+                    )}
                   </div>
                   <div className="text-right flex flex-col gap-1.5 items-end">
                     <span className="inline-flex items-center gap-1 bg-[#128C4F]/10 text-[#128C4F] text-xs font-bold px-2.5 py-1 rounded-full">
                       ✓ Livraison Gratuite
                     </span>
                     <span className="text-[10px] font-semibold text-[#8A5C38] bg-[#8A5C38]/8 px-2 py-0.5 rounded-full">
-                      Offre valable cette semaine
+                      {form.quantite === 1
+                        ? "Offre valable cette semaine"
+                        : form.quantite === 2
+                        ? "Économisez 99 DH"
+                        : "Économisez 178 DH"}
                     </span>
                   </div>
                 </div>
                 <div className="bg-gradient-to-r from-[#8A5C38]/10 to-[#128C4F]/10 rounded-xl px-3 py-2 text-center">
                   <p className="text-[11px] sm:text-xs font-bold text-[#1C1008]">
-                    🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc
+                    {form.quantite === 1
+                      ? "🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc"
+                      : form.quantite === 2
+                      ? "🎉 PACK DUO — Économisez 99 DH + Livraison gratuite sur les 2 tables"
+                      : "🎉 PACK FAMILLE — Économisez 178 DH + Livraison gratuite sur les 3 tables"}
                   </p>
                 </div>
               </div>
@@ -572,7 +648,7 @@ export default function App() {
 
               {/* Primary Full-Width CTA */}
               <button
-                onClick={() => scrollToOrder(1)}
+                onClick={() => scrollToOrder(form.quantite)}
                 className="w-full min-h-[54px] bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-white py-3.5 px-5 rounded-2xl font-bold text-base shadow-md shadow-[#25D366]/25 flex items-center justify-center gap-2.5 transition-all cursor-pointer"
               >
                 <IconWhatsApp size={22} />
