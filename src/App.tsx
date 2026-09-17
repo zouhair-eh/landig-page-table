@@ -408,7 +408,7 @@ export default function App() {
     },
     {
       q: "Quelles sont les dimensions et réglages de la table Mode Trend ?",
-      a: "Le plateau mesure 60 cm × 40 cm. La hauteur est réglable en continu de 65 cm à 90 cm via la molette de serrage, et le plateau s'incline avec une réglette d'arrêt pour retenir vos appareils et livres.",
+      a: "Le plateau mesure 60 cm × 40 cm. La hauteur est réglable en continu de 50 cm à 60 cm via la molette de serrage, et le plateau s'incline avec une réglette d'arrêt pour retenir vos appareils et livres.",
     },
     {
       q: "Le montage de la table est-il facile ?",
@@ -523,7 +523,7 @@ export default function App() {
 
               {/* Short Value Proposition */}
               <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed mb-3.5">
-                Une table d'appoint ingénieuse avec hauteur réglable (65 à 90 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
+                Une table d'appoint ingénieuse avec hauteur réglable (50 à 60 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
               </p>
 
               {/* Price & Offer Box (ON TOP) */}
@@ -730,7 +730,7 @@ export default function App() {
                 </div>
                 <h3 className="font-bold text-sm text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">Hauteur réglable</h3>
                 <p className="text-xs text-[#5C3A1C] leading-relaxed">
-                  Ajustable de 65 à 90 cm pour s'aligner exactement avec votre canapé, lit ou fauteuil.
+                  Ajustable de 50 à 60 cm pour s'aligner exactement avec votre canapé, lit ou fauteuil.
                 </p>
               </div>
             </div>
