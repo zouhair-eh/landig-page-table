@@ -777,95 +777,215 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          5. SECTION "COMMENT L'UTILISER" (Visual Real Use Cases)
+          5. SECTION LIFESTYLE & STORYTELLING (Photos Réelles & Moments de Vie)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-8 sm:py-12 bg-[#FAF6F0] border-b border-[#E6D9C8]/70">
+      <section className="py-12 sm:py-16 bg-[#FAF6F0] border-b border-[#E6D9C8]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
-            <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-1">
-              Utilisation Quotidienne
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-[#8A5C38]/10 text-[#8A5C38] border border-[#8A5C38]/20 mb-3">
+              ✦ Polyvalence & Élégance au Quotidien
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1C1008]">
+            <h2 className="font-serif italic text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1C1008] tracking-tight">
               Une table pour tous vos moments de la journée
             </h2>
+            <p className="mt-2 text-xs sm:text-sm text-[#5C3A1C] max-w-lg mx-auto">
+              Conçue pour s'adapter à votre rythme de vie : du café du matin au travail sur PC, jusqu'à la lecture du soir.
+            </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          {/* 3 Vertical Lifestyle Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20">
             
-            {/* Card 1: Lit & PC */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
+            {/* Card 1: Le confort du soir */}
+            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
                 <img
-                  src="/images/use_bed_laptop.jpg"
-                  alt="Table Mode Trend au lit avec ordinateur"
-                  className="w-full h-full object-contain"
+                  src="/images/lifestyle_night_bed.png"
+                  alt="Le confort du soir - Table Mode Trend près du lit"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
-              <div className="p-3 sm:p-3.5">
-                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Chambre & Confort</span>
-                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Au lit & Télétravail</h3>
-                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
-                  Glisse sous le cadre du lit pour soutenir confortablement votre PC portable, livre et café.
-                </p>
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                    Le confort du soir
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
+                    Une table de chevet élégante et toujours à la bonne hauteur pour vos lectures et moments de repos.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Card 2: Tablette & Salon */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
+            {/* Card 2: Coin détente */}
+            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
                 <img
-                  src="/images/use_tablet_relax.jpg"
-                  alt="Table Mode Trend avec tablette et smartphone"
-                  className="w-full h-full object-contain"
+                  src="/images/lifestyle_sofa_relax.png"
+                  alt="Coin détente - Table Mode Trend près du canapé"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
-              <div className="p-3 sm:p-3.5">
-                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Salon & Détente</span>
-                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Depuis le fauteuil</h3>
-                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
-                  Support stable pour regarder vos séries sur tablette, poser votre boisson ou prendre un encas.
-                </p>
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                    Coin détente
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
+                    Gardez vos essentiels à portée de main lors de vos moments de repos sur le canapé.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Card 3: Multi-usages 180° */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
+            {/* Card 3: Instants en extérieur */}
+            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
                 <img
-                  src="/images/use_tilt_multipurpose.jpg"
-                  alt="Table Mode Trend inclinaison 0 à 180 degrés"
-                  className="w-full h-full object-contain"
+                  src="/images/lifestyle_balcony.png"
+                  alt="Instants en extérieur - Table Mode Trend sur le balcon ou la terrasse"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
-              <div className="p-3 sm:p-3.5">
-                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Polyvalence 0° - 180°</span>
-                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Multi-usages & Pupitre</h3>
-                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
-                  Plateau inclinable avec réglette d'arrêt pour lecture, dessin, repas ou support de partitions.
-                </p>
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                    Instants en extérieur
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
+                    Profitez d’une pause café ou lecture sur votre balcon ou terrasse en toute légèreté.
+                  </p>
+                </div>
               </div>
             </div>
 
-            {/* Card 4: Réglages & Détails */}
-            <div className="bg-white rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:border-[#8A5C38]/50 transition-colors">
-              <div className="h-52 sm:h-60 lg:h-64 overflow-hidden bg-[#FAF6F0] flex items-center justify-center p-1">
-                <img
-                  src="/images/use_structure_details.jpg"
-                  alt="Table Mode Trend détails de réglage et rotation"
-                  className="w-full h-full object-contain"
-                  loading="lazy"
-                />
+          </div>
+
+          {/* ─────────────────────────────────────────────────────────
+              Alternating Storytelling Rows (Zig-Zag Layout)
+          ───────────────────────────────────────────────────────── */}
+          <div className="space-y-12 sm:space-y-16">
+
+            {/* Row 1: Confort au quotidien (Text Left, Image Right) */}
+            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-5 order-2 lg:order-1 text-left">
+                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                    Télétravail & Posture
+                  </span>
+                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
+                    Confort au quotidien
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
+                    Travaillez, étudiez ou regardez vos séries préférées sans compromettre votre posture ni votre confort. Ajustez la hauteur idéale (50 à 60 cm) en quelques secondes pour soulager votre dos et votre cou.
+                  </p>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
+                    <li className="flex items-center gap-2 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
+                      Plateau inclinable jusqu'à 180° pour un angle parfait
+                    </li>
+                    <li className="flex items-center gap-2 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
+                      Réglette anti-dérapante sécurisée pour PC et tablette
+                    </li>
+                  </ul>
+                </div>
+                <div className="lg:col-span-7 order-1 lg:order-2">
+                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
+                    <img
+                      src="/images/lifestyle_laptop_work.png"
+                      alt="Homme travaillant confortablement sur son canapé avec la table Mode Trend"
+                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               </div>
-              <div className="p-3 sm:p-3.5">
-                <span className="text-[9px] sm:text-[10px] font-bold text-[#8A5C38] uppercase block mb-0.5">Finition & Réglages</span>
-                <h3 className="font-bold text-xs sm:text-sm text-[#1C1008] mb-0.5">Hauteur & Rangement</h3>
-                <p className="text-[10px] sm:text-xs text-[#5C3A1C] leading-relaxed hidden sm:block">
-                  Molette rotative pour ajuster la hauteur en douceur et plateau rabattable pour un gain de place.
-                </p>
+            </div>
+
+            {/* Row 2: Intérieur plus élégant (Image Left, Text Right) */}
+            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-7 order-1">
+                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
+                    <img
+                      src="/images/lifestyle_armchair_decor.png"
+                      alt="Décoration salon moderne et élégante avec la table ajustable"
+                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="lg:col-span-5 order-2 text-left">
+                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                    Design & Esthétique
+                  </span>
+                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
+                    Intérieur plus élégant
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
+                    Son design moderne et épuré s'intègre harmonieusement dans tous les styles d'intérieur, du salon à la chambre à coucher. Finition bois noyer chaleureux et piètement noir mat ultra-robuste.
+                  </p>
+                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
+                    <li className="flex items-center gap-2 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
+                      Finition aspect bois premium résistant aux rayures
+                    </li>
+                    <li className="flex items-center gap-2 font-medium">
+                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
+                      Lignes douces et coins arrondis sécurisés
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Row 3: Optimisez chaque mètre carré avec élégance (Text Left, Image Right) */}
+            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div className="lg:col-span-5 order-2 lg:order-1 text-left">
+                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                    Gain de Place Intelligent
+                  </span>
+                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
+                    Optimisez chaque mètre carré avec élégance
+                  </h3>
+                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
+                    Grâce à sa base ultra-plate et son format compact, elle se glisse aisément sous n'importe quel meuble sans encombrer votre pièce. Idéale pour les appartements et espaces contemporains.
+                  </p>
+                  <div className="pt-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const formElem = document.getElementById("order-form-section") || document.querySelector("form");
+                        if (formElem) {
+                          formElem.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }}
+                      className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#8A5C38] to-[#5C3A1C] text-white font-bold text-sm shadow-md hover:shadow-lg hover:from-[#7A4F2F] hover:to-[#4A2D15] active:scale-98 transition-all cursor-pointer"
+                    >
+                      <span>Profiter de l'Offre — {selectedPack === "solo" ? "249 DH" : selectedPack === "duo" ? "399 DH" : "549 DH"}</span>
+                      <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div className="lg:col-span-7 order-1 lg:order-2">
+                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
+                    <img
+                      src="/images/use_bed_laptop.jpg"
+                      alt="Glisse parfaitement sous le lit et le canapé"
+                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
