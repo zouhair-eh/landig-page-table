@@ -800,11 +800,11 @@ export default function App() {
             
             {/* Card 1: Le confort du soir */}
             <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/lifestyle_night_bed.png"
-                  alt="Le confort du soir - Table Mode Trend près du lit"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  alt="Le confort du soir - Table de chevet avec lampe et livre"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
@@ -822,11 +822,11 @@ export default function App() {
 
             {/* Card 2: Coin détente */}
             <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/lifestyle_sofa_relax.png"
-                  alt="Coin détente - Table Mode Trend près du canapé"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  alt="Coin détente - Table près du canapé avec plateau et café"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
@@ -844,11 +844,11 @@ export default function App() {
 
             {/* Card 3: Instants en extérieur */}
             <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#EFE9E0]">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
                 <img
                   src="/images/lifestyle_balcony.png"
-                  alt="Instants en extérieur - Table Mode Trend sur le balcon ou la terrasse"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  alt="Instants en extérieur - Table sur le balcon ou la terrasse"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
               </div>
@@ -900,7 +900,7 @@ export default function App() {
                     <img
                       src="/images/lifestyle_laptop_work.png"
                       alt="Homme travaillant confortablement sur son canapé avec la table Mode Trend"
-                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -916,7 +916,7 @@ export default function App() {
                     <img
                       src="/images/lifestyle_armchair_decor.png"
                       alt="Décoration salon moderne et élégante avec la table ajustable"
-                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
@@ -979,9 +979,9 @@ export default function App() {
                 <div className="lg:col-span-7 order-1 lg:order-2">
                   <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
                     <img
-                      src="/images/use_bed_laptop.jpg"
+                      src="/images/exact_sofa.jpg"
                       alt="Glisse parfaitement sous le lit et le canapé"
-                      className="w-full h-full object-cover hover:scale-102 transition-transform duration-500"
+                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                       loading="lazy"
                     />
                   </div>
