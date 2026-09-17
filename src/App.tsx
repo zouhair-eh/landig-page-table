@@ -212,7 +212,7 @@ export default function App() {
     telephone: "",
     ville: "",
     adresse: "",
-    quantite: 1,
+    quantite: 2,
   });
 
   const cityDropdownRef = useRef<HTMLDivElement>(null);
@@ -526,62 +526,102 @@ export default function App() {
                 Une table d'appoint ingénieuse avec hauteur réglable (65 à 90 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
               </p>
 
-              {/* ── Compact & Premium Offer Selector (1 Table | 2 Tables | 3 Tables) ── */}
-              <div className="mb-2.5">
-                <div className="flex items-center justify-between mb-1.5 px-0.5">
-                  <span className="text-[11px] font-bold text-[#5C3A1C] uppercase tracking-wider">
-                    Choisir votre offre :
+              {/* ── High-Converting Visual Offer Cards (1 Table | 2 Tables | 3 Tables) ── */}
+              <div className="mb-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-extrabold text-[#1C1008] uppercase tracking-wide flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#8A5C38]" />
+                    Sélectionnez votre formule :
                   </span>
-                  {form.quantite === 2 && (
-                    <span className="text-[10px] font-extrabold text-white bg-[#8A5C38] px-2 py-0.5 rounded-full shadow-xs">
-                      ★ Le plus choisi
-                    </span>
-                  )}
-                  {form.quantite === 3 && (
-                    <span className="text-[10px] font-bold text-[#128C4F] bg-[#128C4F]/10 px-2 py-0.5 rounded-full">
-                      Meilleur prix / table
-                    </span>
-                  )}
+                  <span className="text-[11px] font-bold text-[#128C4F]">
+                    ✓ Livraison 100% Gratuite
+                  </span>
                 </div>
 
-                <div className="grid grid-cols-3 gap-1.5 p-1 bg-[#FAF6F0] border border-[#E6D9C8] rounded-xl">
-                  {[
-                    { qty: 1, label: "1 Table", sub: "249 DH" },
-                    { qty: 2, label: "2 Tables", sub: "399 DH", pop: "-99 DH" },
-                    { qty: 3, label: "3 Tables", sub: "569 DH", pop: "-178 DH" },
-                  ].map((item) => {
-                    const isSelected = form.quantite === item.qty;
-                    return (
-                      <button
-                        key={item.qty}
-                        type="button"
-                        onClick={() => setForm((p) => ({ ...p, quantite: item.qty }))}
-                        className={`relative py-1.5 px-2 rounded-lg text-center transition-all cursor-pointer flex flex-col items-center justify-center ${
-                          isSelected
-                            ? "bg-white text-[#1C1008] border border-[#8A5C38] shadow-xs ring-1 ring-[#8A5C38]/20 font-bold"
-                            : "bg-transparent text-[#5C3A1C] hover:bg-white/60 border border-transparent"
-                        }`}
-                      >
-                        {item.pop && (
-                          <span
-                            className={`absolute -top-2 right-1 text-[8px] font-extrabold px-1 rounded-full ${
-                              isSelected
-                                ? "bg-[#128C4F] text-white shadow-xs"
-                                : "bg-[#128C4F]/15 text-[#128C4F]"
-                            }`}
-                          >
-                            {item.pop}
-                          </span>
-                        )}
-                        <span className={`text-xs ${isSelected ? "font-extrabold text-[#8A5C38]" : "font-semibold text-[#1C1008]"}`}>
-                          {item.label}
+                <div className="grid grid-cols-3 gap-2 sm:gap-2.5 pt-2">
+                  
+                  {/* Option 1: 1 Table */}
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 1 }))}
+                    className={`relative p-2.5 sm:p-3 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between text-left ${
+                      form.quantite === 1
+                        ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/20"
+                        : "bg-white/75 border-[#E6D9C8] hover:border-[#8A5C38]/40 hover:bg-white"
+                    }`}
+                  >
+                    <div>
+                      <span className={`text-[11px] sm:text-xs font-bold block leading-tight ${form.quantite === 1 ? "text-[#8A5C38]" : "text-[#1C1008]"}`}>
+                        1 Table
+                      </span>
+                      <span className="font-serif text-lg sm:text-xl font-black text-[#1C1008] block my-0.5">
+                        249 DH
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-[#5C3A1C] font-medium block leading-tight">
+                      Prix standard
+                    </span>
+                  </button>
+
+                  {/* Option 2: 2 Tables (Duo) — DOMINANT / LE PLUS CHOISI */}
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 2 }))}
+                    className={`relative p-2.5 sm:p-3 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between text-left ${
+                      form.quantite === 2
+                        ? "bg-white border-[#8A5C38] shadow-lg ring-2 ring-[#8A5C38]/30 scale-[1.02]"
+                        : "bg-white border-[#8A5C38]/40 hover:border-[#8A5C38] shadow-xs"
+                    }`}
+                  >
+                    {/* Badge Le plus choisi */}
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#8A5C38] text-white text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-md whitespace-nowrap">
+                      ★ Le plus choisi
+                    </div>
+
+                    <div className="pt-0.5">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[11px] sm:text-xs font-black text-[#8A5C38] leading-tight">
+                          Pack Duo (2)
                         </span>
-                        <span className="text-[10px] text-neutral-500 font-semibold leading-none mt-0.5">
-                          {item.sub}
+                        <span className="text-[9px] font-bold text-white bg-[#128C4F] px-1.5 py-0.2 rounded-full">
+                          -99 DH
                         </span>
-                      </button>
-                    );
-                  })}
+                      </div>
+                      <span className="font-serif text-lg sm:text-xl font-black text-[#1C1008] block my-0.5">
+                        399 DH
+                      </span>
+                    </div>
+                    <span className="text-[10px] text-[#8A5C38] font-bold block leading-tight">
+                      199,50 DH / table
+                    </span>
+                  </button>
+
+                  {/* Option 3: 3 Tables (Famille) */}
+                  <button
+                    type="button"
+                    onClick={() => setForm((p) => ({ ...p, quantite: 3 }))}
+                    className={`relative p-2.5 sm:p-3 rounded-2xl border-2 transition-all cursor-pointer flex flex-col justify-between text-left ${
+                      form.quantite === 3
+                        ? "bg-white border-[#8A5C38] shadow-md ring-2 ring-[#8A5C38]/20"
+                        : "bg-white/75 border-[#E6D9C8] hover:border-[#8A5C38]/40 hover:bg-white"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className={`text-[11px] sm:text-xs font-bold leading-tight ${form.quantite === 3 ? "text-[#8A5C38]" : "text-[#1C1008]"}`}>
+                        Pack 3 (Famille)
+                      </span>
+                      <span className="text-[9px] font-bold text-[#8A5C38] bg-[#8A5C38]/10 px-1.5 py-0.2 rounded-full">
+                        -178 DH
+                      </span>
+                    </div>
+                    <span className="font-serif text-lg sm:text-xl font-black text-[#1C1008] block my-0.5">
+                      569 DH
+                    </span>
+                    <span className="text-[10px] text-[#5C3A1C] font-semibold block leading-tight">
+                      189,67 DH / table
+                    </span>
+                  </button>
+
                 </div>
               </div>
 
