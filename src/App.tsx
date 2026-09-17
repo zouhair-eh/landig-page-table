@@ -969,7 +969,7 @@ export default function App() {
                       }}
                       className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#8A5C38] to-[#5C3A1C] text-white font-bold text-sm shadow-md hover:shadow-lg hover:from-[#7A4F2F] hover:to-[#4A2D15] active:scale-98 transition-all cursor-pointer"
                     >
-                      <span>Profiter de l'Offre — {selectedPack === "solo" ? "249 DH" : selectedPack === "duo" ? "399 DH" : "549 DH"}</span>
+                      <span>Profiter de l'Offre — {summary.price} DH</span>
                       <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
