@@ -526,8 +526,57 @@ export default function App() {
                 Une table d'appoint ingénieuse avec hauteur réglable (65 à 90 cm), plateau inclinable et socle extra-plat qui glisse facilement sous votre canapé ou votre lit.
               </p>
 
-              {/* ── High-Converting Visual Offer Cards (1 Table | 2 Tables | 3 Tables) ── */}
-              <div className="mb-3">
+              {/* Price & Offer Box (ON TOP) */}
+              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-3 shadow-xs transition-all">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
+                      {form.quantite === 1
+                        ? "Offre de lancement"
+                        : form.quantite === 2
+                        ? "Pack 2 Tables (Duo)"
+                        : "Pack 3 Tables (Famille)"}
+                    </span>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="font-serif text-3xl sm:text-4xl font-black text-[#1C1008]">
+                        {summary.price} DH
+                      </span>
+                      <span className="text-sm text-neutral-400 line-through font-semibold">
+                        {form.quantite === 1 ? "299 DH" : form.quantite === 2 ? "498 DH" : "747 DH"}
+                      </span>
+                    </div>
+                    {form.quantite > 1 && (
+                      <span className="text-[11px] font-bold text-[#8A5C38] block mt-0.5">
+                        Soit {form.quantite === 2 ? "199,50" : "189,67"} DH / table
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-right flex flex-col gap-1.5 items-end">
+                    <span className="inline-flex items-center gap-1 bg-[#128C4F]/10 text-[#128C4F] text-xs font-bold px-2.5 py-1 rounded-full">
+                      ✓ Livraison Gratuite
+                    </span>
+                    <span className="text-[10px] font-semibold text-[#8A5C38] bg-[#8A5C38]/8 px-2 py-0.5 rounded-full">
+                      {form.quantite === 1
+                        ? "Offre valable cette semaine"
+                        : form.quantite === 2
+                        ? "Économisez 99 DH"
+                        : "Économisez 178 DH"}
+                    </span>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-[#8A5C38]/10 to-[#128C4F]/10 rounded-xl px-3 py-2 text-center">
+                  <p className="text-[11px] sm:text-xs font-bold text-[#1C1008]">
+                    {form.quantite === 1
+                      ? "🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc"
+                      : form.quantite === 2
+                      ? "🎉 PACK DUO — Économisez 99 DH + Livraison gratuite sur les 2 tables"
+                      : "🎉 PACK FAMILLE — Économisez 178 DH + Livraison gratuite sur les 3 tables"}
+                  </p>
+                </div>
+              </div>
+
+              {/* ── High-Converting Visual Offer Cards (UNDER PRICE BOX) ── */}
+              <div className="mb-3.5">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-extrabold text-[#1C1008] uppercase tracking-wide flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-[#8A5C38]" />
@@ -622,55 +671,6 @@ export default function App() {
                     </span>
                   </button>
 
-                </div>
-              </div>
-
-              {/* Price & Offer Box */}
-              <div className="bg-white border-2 border-[#8A5C38]/25 rounded-2xl p-3.5 sm:p-4 mb-2 shadow-xs transition-all">
-                <div className="flex items-center justify-between mb-2">
-                  <div>
-                    <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block">
-                      {form.quantite === 1
-                        ? "Offre de lancement"
-                        : form.quantite === 2
-                        ? "Pack 2 Tables (Duo)"
-                        : "Pack 3 Tables (Famille)"}
-                    </span>
-                    <div className="flex items-baseline gap-2 mt-0.5">
-                      <span className="font-serif text-3xl sm:text-4xl font-black text-[#1C1008]">
-                        {summary.price} DH
-                      </span>
-                      <span className="text-sm text-neutral-400 line-through font-semibold">
-                        {form.quantite === 1 ? "299 DH" : form.quantite === 2 ? "498 DH" : "747 DH"}
-                      </span>
-                    </div>
-                    {form.quantite > 1 && (
-                      <span className="text-[11px] font-bold text-[#8A5C38] block mt-0.5">
-                        Soit {form.quantite === 2 ? "199,50" : "189,67"} DH / table
-                      </span>
-                    )}
-                  </div>
-                  <div className="text-right flex flex-col gap-1.5 items-end">
-                    <span className="inline-flex items-center gap-1 bg-[#128C4F]/10 text-[#128C4F] text-xs font-bold px-2.5 py-1 rounded-full">
-                      ✓ Livraison Gratuite
-                    </span>
-                    <span className="text-[10px] font-semibold text-[#8A5C38] bg-[#8A5C38]/8 px-2 py-0.5 rounded-full">
-                      {form.quantite === 1
-                        ? "Offre valable cette semaine"
-                        : form.quantite === 2
-                        ? "Économisez 99 DH"
-                        : "Économisez 178 DH"}
-                    </span>
-                  </div>
-                </div>
-                <div className="bg-gradient-to-r from-[#8A5C38]/10 to-[#128C4F]/10 rounded-xl px-3 py-2 text-center">
-                  <p className="text-[11px] sm:text-xs font-bold text-[#1C1008]">
-                    {form.quantite === 1
-                      ? "🎉 OFFRE DE LANCEMENT — Livraison gratuite partout au Maroc"
-                      : form.quantite === 2
-                      ? "🎉 PACK DUO — Économisez 99 DH + Livraison gratuite sur les 2 tables"
-                      : "🎉 PACK FAMILLE — Économisez 178 DH + Livraison gratuite sur les 3 tables"}
-                  </p>
                 </div>
               </div>
 
