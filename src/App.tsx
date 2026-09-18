@@ -804,12 +804,12 @@ export default function App() {
             </p>
           </div>
 
-          {/* 3 Vertical Lifestyle Cards */}
+          {/* 3 Lifestyle Visual Columns (Natural breathing editorial layout) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-16 sm:mb-20">
             
             {/* Card 1: Le confort du soir */}
-            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
+            <div className="group flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
                   src="/images/lifestyle_night_bed.png"
                   alt="Le confort du soir - Table de chevet avec lampe et livre"
@@ -817,9 +817,9 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+              <div className="pt-4 sm:pt-5 text-left flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">
                     Le confort du soir
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
@@ -830,8 +830,8 @@ export default function App() {
             </div>
 
             {/* Card 2: Coin détente */}
-            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
+            <div className="group flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
                   src="/images/lifestyle_sofa_relax.png"
                   alt="Coin détente - Table près du canapé avec plateau et café"
@@ -839,9 +839,9 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+              <div className="pt-4 sm:pt-5 text-left flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">
                     Coin détente
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
@@ -852,8 +852,8 @@ export default function App() {
             </div>
 
             {/* Card 3: Instants en extérieur */}
-            <div className="group bg-white rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-xs hover:shadow-xl hover:border-[#8A5C38]/40 transition-all duration-300 flex flex-col">
-              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden bg-[#FAF6F0]">
+            <div className="group flex flex-col">
+              <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
                   src="/images/lifestyle_balcony.png"
                   alt="Instants en extérieur - Table sur le balcon ou la terrasse"
@@ -861,9 +861,9 @@ export default function App() {
                   loading="lazy"
                 />
               </div>
-              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+              <div className="pt-4 sm:pt-5 text-left flex-1 flex flex-col justify-between">
                 <div>
-                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-2 group-hover:text-[#8A5C38] transition-colors">
+                  <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">
                     Instants en extérieur
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
@@ -876,124 +876,118 @@ export default function App() {
           </div>
 
           {/* ─────────────────────────────────────────────────────────
-              Alternating Storytelling Rows (Zig-Zag Layout)
+              Alternating Storytelling Rows (Natural Unboxed Editorial Layout)
           ───────────────────────────────────────────────────────── */}
-          <div className="space-y-12 sm:space-y-16">
+          <div className="space-y-16 sm:space-y-24">
 
             {/* Row 1: Confort au quotidien (Text Left, Image Right) */}
-            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-5 order-2 lg:order-1 text-left">
-                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
-                    Télétravail & Posture
-                  </span>
-                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
-                    Confort au quotidien
-                  </h3>
-                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
-                    Travaillez, étudiez ou regardez vos séries préférées sans compromettre votre posture ni votre confort. Ajustez la hauteur idéale (50 à 60 cm) en quelques secondes pour soulager votre dos et votre cou.
-                  </p>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
-                    <li className="flex items-center gap-2 font-medium">
-                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
-                      Plateau inclinable jusqu'à 180° pour un angle parfait
-                    </li>
-                    <li className="flex items-center gap-2 font-medium">
-                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
-                      Réglette anti-dérapante sécurisée pour PC et tablette
-                    </li>
-                  </ul>
-                </div>
-                <div className="lg:col-span-7 order-1 lg:order-2">
-                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
-                    <img
-                      src="/images/lifestyle_laptop_work.png"
-                      alt="Homme travaillant confortablement sur son canapé avec la table Mode Trend"
-                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              <div className="lg:col-span-5 order-2 lg:order-1 text-left">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                  Télétravail & Posture
+                </span>
+                <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-3.5">
+                  Confort au quotidien
+                </h3>
+                <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-5">
+                  Travaillez, étudiez ou regardez vos séries préférées sans compromettre votre posture ni votre confort. Ajustez la hauteur idéale (50 à 60 cm) en quelques secondes pour soulager votre dos et votre cou.
+                </p>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
+                  <li className="flex items-center gap-2.5 font-medium">
+                    <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    Plateau inclinable jusqu'à 180° pour un angle parfait
+                  </li>
+                  <li className="flex items-center gap-2.5 font-medium">
+                    <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    Réglette anti-dérapante sécurisée pour PC et tablette
+                  </li>
+                </ul>
+              </div>
+              <div className="lg:col-span-7 order-1 lg:order-2">
+                <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-white">
+                  <img
+                    src="/images/lifestyle_laptop_work.png"
+                    alt="Homme travaillant confortablement sur son canapé avec la table Mode Trend"
+                    className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
 
             {/* Row 2: Intérieur plus élégant (Image Left, Text Right) */}
-            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-7 order-1">
-                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
-                    <img
-                      src="/images/lifestyle_armchair_decor.png"
-                      alt="Décoration salon moderne et élégante avec la table ajustable"
-                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              <div className="lg:col-span-7 order-1">
+                <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-white">
+                  <img
+                    src="/images/lifestyle_armchair_decor.png"
+                    alt="Décoration salon moderne et élégante avec la table ajustable"
+                    className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="lg:col-span-5 order-2 text-left">
-                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
-                    Design & Esthétique
-                  </span>
-                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
-                    Intérieur plus élégant
-                  </h3>
-                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
-                    Son design moderne et épuré s'intègre harmonieusement dans tous les styles d'intérieur, du salon à la chambre à coucher. Finition bois noyer chaleureux et piètement noir mat ultra-robuste.
-                  </p>
-                  <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
-                    <li className="flex items-center gap-2 font-medium">
-                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
-                      Finition aspect bois premium résistant aux rayures
-                    </li>
-                    <li className="flex items-center gap-2 font-medium">
-                      <span className="w-5 h-5 rounded-full bg-[#128C4F]/10 text-[#128C4F] flex items-center justify-center text-xs font-bold">✓</span>
-                      Lignes douces et coins arrondis sécurisés
-                    </li>
-                  </ul>
-                </div>
+              </div>
+              <div className="lg:col-span-5 order-2 text-left">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                  Design & Esthétique
+                </span>
+                <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-3.5">
+                  Intérieur plus élégant
+                </h3>
+                <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-5">
+                  Son design moderne et épuré s'intègre harmonieusement dans tous les styles d'intérieur, du salon à la chambre à coucher. Finition bois noyer chaleureux et piètement noir mat ultra-robuste.
+                </p>
+                <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
+                  <li className="flex items-center gap-2.5 font-medium">
+                    <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    Finition aspect bois premium résistant aux rayures
+                  </li>
+                  <li className="flex items-center gap-2.5 font-medium">
+                    <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                    Lignes douces et coins arrondis sécurisés
+                  </li>
+                </ul>
               </div>
             </div>
 
             {/* Row 3: Optimisez chaque mètre carré avec élégance (Text Left, Image Right) */}
-            <div className="bg-white rounded-3xl border border-[#E6D9C8] p-6 sm:p-10 shadow-xs hover:shadow-md transition-shadow">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div className="lg:col-span-5 order-2 lg:order-1 text-left">
-                  <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
-                    Gain de Place Intelligent
-                  </span>
-                  <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-4">
-                    Optimisez chaque mètre carré avec élégance
-                  </h3>
-                  <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
-                    Grâce à sa base ultra-plate et son format compact, elle se glisse aisément sous n'importe quel meuble sans encombrer votre pièce. Idéale pour les appartements et espaces contemporains.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const formElem = document.getElementById("order-form-section") || document.querySelector("form");
-                        if (formElem) {
-                          formElem.scrollIntoView({ behavior: "smooth", block: "start" });
-                        }
-                      }}
-                      className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#8A5C38] to-[#5C3A1C] text-white font-bold text-sm shadow-md hover:shadow-lg hover:from-[#7A4F2F] hover:to-[#4A2D15] active:scale-98 transition-all cursor-pointer"
-                    >
-                      <span>Profiter de l'Offre — {summary.price} DH</span>
-                      <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </button>
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+              <div className="lg:col-span-5 order-2 lg:order-1 text-left">
+                <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
+                  Gain de Place Intelligent
+                </span>
+                <h3 className="font-serif italic text-2xl sm:text-3xl font-bold text-[#1C1008] leading-tight mb-3.5">
+                  Optimisez chaque mètre carré avec élégance
+                </h3>
+                <p className="text-sm sm:text-base text-[#5C3A1C] leading-relaxed mb-6">
+                  Grâce à sa base ultra-plate et son format compact, elle se glisse aisément sous n'importe quel meuble sans encombrer votre pièce. Idéale pour les appartements et espaces contemporains.
+                </p>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const formElem = document.getElementById("order-form-section") || document.querySelector("form");
+                      if (formElem) {
+                        formElem.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    }}
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#8A5C38] to-[#5C3A1C] text-white font-bold text-sm shadow-md hover:shadow-lg hover:from-[#7A4F2F] hover:to-[#4A2D15] active:scale-98 transition-all cursor-pointer"
+                  >
+                    <span>Profiter de l'Offre — {summary.price} DH</span>
+                    <svg className="w-4 h-4 rtl:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </button>
                 </div>
-                <div className="lg:col-span-7 order-1 lg:order-2">
-                  <div className="rounded-2xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-[#FAF6F0]">
-                    <img
-                      src="/images/lifestyle_space_smart.jpg"
-                      alt="Table d'appoint Mode Trend glissant parfaitement sous le canapé dans un salon lumineux"
-                      className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                  </div>
+              </div>
+              <div className="lg:col-span-7 order-1 lg:order-2">
+                <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-white">
+                  <img
+                    src="/images/lifestyle_space_smart.jpg"
+                    alt="Table d'appoint Mode Trend glissant parfaitement sous le canapé dans un salon lumineux"
+                    className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -1006,7 +1000,7 @@ export default function App() {
       {/* ─────────────────────────────────────────────────────────────
           6. RÉASSURANCE & ENGAGEMENTS DE SERVICE
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-6 sm:py-8 bg-white border-b border-[#E6D9C8]">
+      <section className="py-6 sm:py-8 bg-white border-b border-[#E6D9C8]/80">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
             
@@ -1055,14 +1049,14 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          6b. TÉMOIGNAGES CLIENTS — Comment ils ont reçu leur produit
+          6b. TÉMOIGNAGES CLIENTS — Comment ils ont reçu leur produit (Proof / Soft White)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-8 sm:py-12 bg-[#FAF6F0] border-b border-[#E6D9C8]">
+      <section className="py-10 sm:py-14 bg-white border-b border-[#E6D9C8]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8">
+          <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
             <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-1">
-              Avis Clients
+              Avis Clients Vérifiés
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1C1008]">
               Ils ont adopté Mode Trend chez eux
@@ -1075,7 +1069,7 @@ export default function App() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[960px] mx-auto">
 
             {/* Testimonial 1 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
                   S.A
@@ -1100,7 +1094,7 @@ export default function App() {
             </div>
 
             {/* Testimonial 2 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
                   Y.M
@@ -1125,7 +1119,7 @@ export default function App() {
             </div>
 
             {/* Testimonial 3 */}
-            <div className="bg-white rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
                   I.B
@@ -1160,7 +1154,7 @@ export default function App() {
       <section
         id="order-form-section"
         ref={orderFormRef}
-        className="py-10 sm:py-14 bg-gradient-to-b from-[#F9F6F1] to-[#F2EBE0] border-b border-[#E6D9C8]"
+        className="py-12 sm:py-16 bg-[#FAF6F0] border-b border-[#E6D9C8]"
       >
         <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -1536,31 +1530,34 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          8. FAQ SECTION
+          8. FAQ SECTION (Informational / Warm Cream)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-10 sm:py-14 bg-white border-b border-[#E6D9C8]">
+      <section className="py-12 sm:py-16 bg-[#FAF6F0] border-b border-[#E6D9C8]">
         <div className="max-w-[760px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="text-center mb-8">
+          <div className="text-center mb-8 sm:mb-10">
+            <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-1">
+              Foire Aux Questions
+            </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1C1008]">
               Questions fréquentes
             </h2>
             <p className="text-xs sm:text-sm text-[#5C3A1C] mt-1">
-              Tout ce que vous devez savoir sur la table Mode Trend.
+              Tout ce que vous devez savoir sur la table Mode Trend et la livraison au Maroc.
             </p>
           </div>
 
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {faqs.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div
                   key={idx}
-                  className="bg-[#F9F6F1] border border-[#E6D9C8] rounded-2xl overflow-hidden transition-all"
+                  className="bg-white border border-[#E6D9C8] rounded-2xl overflow-hidden shadow-xs transition-all"
                 >
                   <button
                     onClick={() => setActiveFaq(isOpen ? null : idx)}
-                    className="w-full text-left p-4 flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-[#1C1008] hover:bg-[#FAF6F0] transition-colors cursor-pointer"
+                    className="w-full text-left p-4 sm:p-4.5 flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-[#1C1008] hover:bg-[#FAF6F0]/60 transition-colors cursor-pointer"
                   >
                     <span>{faq.q}</span>
                     <IconChevronDown
@@ -1571,7 +1568,7 @@ export default function App() {
                     />
                   </button>
                   {isOpen && (
-                    <div className="px-4 pb-4 pt-0 text-xs text-[#5C3A1C] leading-relaxed border-t border-[#E6D9C8]/40">
+                    <div className="px-4 pb-4 sm:px-4.5 sm:pb-4.5 pt-0 text-xs text-[#5C3A1C] leading-relaxed border-t border-[#E6D9C8]/40">
                       {faq.a}
                     </div>
                   )}
@@ -1581,7 +1578,7 @@ export default function App() {
           </div>
 
           {/* Direct Contact Support Button (triggers Contact event) */}
-          <div className="mt-8 text-center bg-[#FAF6F0] p-4 rounded-2xl border border-[#E6D9C8]">
+          <div className="mt-8 text-center bg-white p-5 rounded-2xl border border-[#E6D9C8] shadow-xs">
             <p className="text-xs font-semibold text-[#5C3A1C] mb-2.5">
               Une question avant de passer commande ? Notre équipe vous répond directement.
             </p>
@@ -1598,9 +1595,9 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          9. FINAL REASSURING CTA SECTION
+          9. FINAL REASSURING CTA SECTION (Action / Soft White)
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-10 sm:py-14 bg-[#FAF6F0] border-b border-[#E6D9C8] text-center">
+      <section className="py-12 sm:py-16 bg-white border-b border-[#E6D9C8] text-center">
         <div className="max-w-[640px] mx-auto px-4 sm:px-6 lg:px-8">
           <span className="text-xs font-bold text-[#8A5C38] uppercase tracking-wider block mb-2">
             Paiement à la livraison • Partout au Maroc
@@ -1608,8 +1605,8 @@ export default function App() {
           <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#1C1008] mb-2">
             Commandez votre table Mode Trend aujourd'hui
           </h2>
-          <p className="text-sm font-bold text-[#128C4F] mb-5">
-            {summary.price} DH ({form.quantite} {form.quantite > 1 ? "tables" : "table"}) — Livraison gratuite
+          <p className="text-sm font-bold text-[#128C4F] mb-6">
+            {summary.price} DH ({form.quantite} {form.quantite > 1 ? "tables" : "table"}) — Livraison 100% gratuite
           </p>
           <button
             onClick={() => scrollToOrder(form.quantite)}
