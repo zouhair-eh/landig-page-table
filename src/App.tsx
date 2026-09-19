@@ -7,6 +7,7 @@ import {
   trackLead,
   trackContact,
 } from "./lib/pixel";
+import { saveLead } from "./lib/leads";
 
 /* ─────────────────────────────────────────────────────────────────────────────
    CONFIG & WHATSAPP LINK GENERATOR
@@ -70,7 +71,7 @@ Je souhaite commander :
 • Produit : Table d'Appoint Mode Trend (Réglable & Inclinable)
 • Formule : ${summary.label} (Quantité : ${d.quantite})
 • Montant total : ${summary.price} DH
-• Livraison : Gratuite partout au Maroc
+• Livraison : Gratuite partout au Maroc (24h-48h)
 • Paiement : À la livraison (Cash on Delivery)
 
 Mes coordonnées de livraison :
@@ -163,12 +164,9 @@ function IconTilt({ size = 22, className = "" }: { size?: number; className?: st
 function IconBase({ size = 22, className = "" }: { size?: number; className?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      {/* Table top */}
       <rect x="4" y="4" width="16" height="3" rx="1.5" fill="currentColor" fillOpacity="0.15" />
       <rect x="4" y="4" width="16" height="3" rx="1.5" />
-      {/* Offset leg on right */}
       <line x1="16" y1="7" x2="16" y2="18" />
-      {/* Ultra flat sliding base */}
       <rect x="2" y="18" width="20" height="3.5" rx="1.75" fill="currentColor" fillOpacity="0.25" />
       <rect x="2" y="18" width="20" height="3.5" rx="1.75" strokeWidth="1.75" />
     </svg>
@@ -183,6 +181,15 @@ function IconComfort({ size = 22, className = "" }: { size?: number; className?:
       <path d="M4 17v3" />
       <path d="M20 17v3" />
       <circle cx="12" cy="13" r="1.5" fill="currentColor" />
+    </svg>
+  );
+}
+
+function IconShieldCheck({ size = 22, className = "" }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      <polyline points="9 12 11 14 15 10" />
     </svg>
   );
 }
@@ -206,6 +213,7 @@ export default function App() {
   const [showCityDropdown, setShowCityDropdown] = useState(false);
   const [cityFilter, setCityFilter] = useState("");
   const [touched, setTouched] = useState(false);
+  const [activePolicyModal, setActivePolicyModal] = useState<"delivery" | "privacy" | "terms" | null>(null);
 
   const [form, setForm] = useState<OrderData>({
     nom: "",
@@ -309,7 +317,7 @@ export default function App() {
     }
   };
 
-  // 4. Meta Pixel: Track Lead strictly on valid form submit, protected against double clicks & duplicate eventIDs
+  // 4. Meta Pixel + Local/Cloud Persistence: Save lead immediately before opening WhatsApp
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
@@ -333,10 +341,19 @@ export default function App() {
     isSubmittingRef.current = true;
 
     const currentSummary = getOrderSummary(form.quantite);
-    // 1 Submit = 1 Single EventID generated ONCE
-    const leadEventId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
 
-    // Fire 1 single Lead event with the unique eventID
+    // 1. Persist lead data locally (and via webhook) to ensure ZERO lost leads if WhatsApp is closed
+    const savedLead = saveLead({
+      nom: nomTrimmed,
+      telephone: phoneTrimmed,
+      ville: villeTrimmed,
+      adresse: adresseTrimmed,
+      quantite: form.quantite,
+      formule: currentSummary.label,
+      montantTotal: currentSummary.price,
+    });
+
+    // 2. Fire 1 single Lead event with the unique eventID
     trackLead(
       {
         content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
@@ -344,10 +361,10 @@ export default function App() {
         currency: "MAD",
         quantity: form.quantite,
       },
-      leadEventId
+      savedLead.id
     );
 
-    // Open WhatsApp
+    // 3. Open WhatsApp
     const url = generateWhatsAppLink(form);
     window.open(url, "_blank", "noopener,noreferrer");
 
@@ -395,24 +412,24 @@ export default function App() {
 
   const faqs = [
     {
-      q: "Comment fonctionne le paiement ?",
+      q: "Quels sont les délais et conditions de livraison ?",
+      a: "La livraison est 100% GRATUITE partout au Maroc. Les délais sont de 24h à 48h ouvrables pour Casablanca, Rabat, Marrakech, Tanger et les grandes villes (48h à 72h pour les autres zones). Notre transporteur vous contacte par téléphone avant de passer.",
+    },
+    {
+      q: "Comment fonctionne le paiement à la livraison ?",
       a: "Le paiement s'effectue à 100% à la livraison (Cash on Delivery). Vous réglez directement le montant en espèces au livreur après réception de votre table.",
     },
     {
-      q: "La livraison est-elle vraiment gratuite ?",
-      a: "Oui, la livraison est 100% gratuite partout au Maroc pour toute commande de 1, 2 ou 3 tables Mode Trend.",
-    },
-    {
-      q: "Comment se déroule la confirmation de commande ?",
-      a: "Après avoir complété vos coordonnées et cliqué sur le bouton WhatsApp, votre message est généré automatiquement. Dès que vous l'envoyez, notre service client vous contacte par téléphone ou message pour valider votre adresse et lancer l'expédition.",
+      q: "Quelle est la garantie et que faire en cas de problème ?",
+      a: "Vous bénéficiez d'une garantie d'échange gratuit sous 7 jours en cas de pièce défectueuse ou de non-conformité. Notre service après-vente basé au Maroc est joignable 6j/7 sur WhatsApp au +212 7 67 95 15 63.",
     },
     {
       q: "Quelles sont les dimensions et réglages de la table Mode Trend ?",
-      a: "Le plateau mesure 60 cm × 40 cm. La hauteur est réglable en continu de 50 cm à 60 cm via la molette de serrage, et le plateau s'incline avec une réglette d'arrêt pour retenir vos appareils et livres.",
+      a: "Le plateau mesure 60 cm × 40 cm. La hauteur est réglable en continu de 50 cm à 60 cm via la molette de serrage, et le plateau dispose d'une réglette d'arrêt pour maintenir vos appareils et livres en position inclinée.",
     },
     {
       q: "Le montage de la table est-il facile ?",
-      a: "Très facile et rapide : le montage s'effectue en moins de 5 minutes. Tous les outils et les vis nécessaires sont fournis dans le colis.",
+      a: "Très facile et rapide : le montage s'effectue en moins de 5 minutes. Tous les outils et les vis nécessaires sont fournis dans le colis avec une notice claire.",
     },
   ];
 
@@ -424,7 +441,7 @@ export default function App() {
       ───────────────────────────────────────────────────────────── */}
       <div className="bg-[#1C1008] text-[#F9F6F1] h-8 sm:h-9 px-3 text-center text-[11px] sm:text-xs font-semibold tracking-wide flex items-center justify-center gap-2 shrink-0">
         <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#25D366]" />
-        <span>Livraison partout au Maroc • Paiement à la livraison</span>
+        <span>Livraison rapide 24h/48h partout au Maroc • Paiement à la livraison • Garantie échange 7 jours</span>
       </div>
 
       {/* ─────────────────────────────────────────────────────────────
@@ -479,6 +496,7 @@ export default function App() {
                     alt={gallery[activeTab].title}
                     className={`w-full h-full ${activeTab === "details" ? "object-contain p-2" : "object-cover"} object-center transition-all duration-300`}
                     loading="eager"
+                    fetchPriority="high"
                   />
 
                   <div className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full shadow-xs">
@@ -895,11 +913,11 @@ export default function App() {
                 <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
                   <li className="flex items-center gap-2.5 font-medium">
                     <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
-                    Plateau inclinable jusqu'à 180° pour un angle parfait
+                    Plateau inclinable multi-positions avec réglette d'arrêt pour un angle optimal
                   </li>
                   <li className="flex items-center gap-2.5 font-medium">
                     <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
-                    Réglette anti-dérapante sécurisée pour PC et tablette
+                    Réglette anti-dérapante sécurisée pour PC, livre et tablette
                   </li>
                 </ul>
               </div>
@@ -910,6 +928,7 @@ export default function App() {
                     alt="Homme travaillant confortablement sur son canapé avec la table Mode Trend"
                     className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -924,6 +943,7 @@ export default function App() {
                     alt="Décoration salon moderne et élégante avec la table ajustable"
                     className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -940,7 +960,7 @@ export default function App() {
                 <ul className="space-y-2.5 text-xs sm:text-sm text-[#1C1008]">
                   <li className="flex items-center gap-2.5 font-medium">
                     <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
-                    Finition aspect bois premium résistant aux rayures
+                    Finition aspect bois noyer soignée et facile d'entretien
                   </li>
                   <li className="flex items-center gap-2.5 font-medium">
                     <span className="w-5 h-5 rounded-full bg-[#128C4F]/15 text-[#128C4F] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
@@ -987,6 +1007,7 @@ export default function App() {
                     alt="Table d'appoint Mode Trend glissant parfaitement sous le canapé dans un salon lumineux"
                     className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
               </div>
@@ -1019,18 +1040,18 @@ export default function App() {
                 <IconTruck size={20} />
               </div>
               <div>
-                <p className="font-bold text-xs text-[#1C1008]">Livraison partout au Maroc</p>
-                <p className="text-[11px] text-[#5C3A1C]">100% Gratuite sans frais cachés</p>
+                <p className="font-bold text-xs text-[#1C1008]">Livraison 24h / 48h</p>
+                <p className="text-[11px] text-[#5C3A1C]">100% Gratuite partout au Maroc</p>
               </div>
             </div>
 
             <div className="bg-[#F9F6F1] p-3.5 rounded-2xl border border-[#E6D9C8] flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-[#8A5C38]/10 text-[#8A5C38] flex items-center justify-center shrink-0">
-                <IconPhoneCall size={20} />
+                <IconShieldCheck size={20} className="text-[#8A5C38]" />
               </div>
               <div>
-                <p className="font-bold text-xs text-[#1C1008]">Vérification téléphonique</p>
-                <p className="text-[11px] text-[#5C3A1C]">Confirmation avant expédition</p>
+                <p className="font-bold text-xs text-[#1C1008]">Garantie Échange 7 Jours</p>
+                <p className="text-[11px] text-[#5C3A1C]">Remplacement sans tracas</p>
               </div>
             </div>
 
@@ -1040,7 +1061,7 @@ export default function App() {
               </div>
               <div>
                 <p className="font-bold text-xs text-[#1C1008]">Service client WhatsApp</p>
-                <p className="text-[11px] text-[#5C3A1C]">Assistance rapide 7j/7</p>
+                <p className="text-[11px] text-[#5C3A1C]">Lun-Sam : 09h00 - 19h00</p>
               </div>
             </div>
 
@@ -1049,97 +1070,90 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          6b. TÉMOIGNAGES CLIENTS — Comment ils ont reçu leur produit (Proof / Soft White)
+          6b. GARANTIE SÉRÉNITÉ & ÉTAPES DE LIVRAISON AU MAROC
       ───────────────────────────────────────────────────────────── */}
       <section className="py-10 sm:py-14 bg-white border-b border-[#E6D9C8]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
           <div className="text-center max-w-xl mx-auto mb-8 sm:mb-10">
             <span className="text-[10px] font-bold text-[#8A5C38] uppercase tracking-wider block mb-1">
-              Avis Clients Vérifiés
+              Processus Transparent & Sécurisé
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#1C1008]">
-              Ils ont adopté Mode Trend chez eux
+              Comment se déroule votre commande ?
             </h2>
             <p className="text-xs sm:text-sm text-[#5C3A1C] mt-1">
-              Découvrez comment nos clients ont reçu leur table partout au Maroc.
+              Un service de livraison soigné et un paiement 100% à réception partout au Maroc.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-[960px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1080px] mx-auto">
 
-            {/* Testimonial 1 */}
-            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
-                  S.A
+            {/* Step 1 */}
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-xl bg-[#8A5C38] text-white font-bold text-sm flex items-center justify-center mb-3.5 shadow-xs">
+                  1
                 </div>
-                <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Sara A.</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Casablanca • Quartier Bourgogne</p>
-                </div>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5">Commande simplifiée</h3>
+                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+                  Remplissez le formulaire ci-dessous avec votre adresse et envoyez votre message sur WhatsApp.
+                </p>
               </div>
-              <div className="flex gap-0.5 mb-2.5">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                ))}
-              </div>
-              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
-                "Le colis est arrivé bien emballé en 3 jours. Le montage était super rapide, en moins de 5 minutes. La table est stable et très pratique pour travailler depuis le canapé."
-              </p>
-              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+              <div className="mt-3.5 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Commande confirmée & livrée (Paiement COD)</span>
+                <span>Aucun paiement en ligne requis</span>
               </div>
             </div>
 
-            {/* Testimonial 2 */}
-            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
-                  Y.M
+            {/* Step 2 */}
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-xl bg-[#8A5C38] text-white font-bold text-sm flex items-center justify-center mb-3.5 shadow-xs">
+                  2
                 </div>
-                <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Youssef M.</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Rabat • Agdal</p>
-                </div>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5">Confirmation téléphonique</h3>
+                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+                  Notre équipe vous contacte rapidement pour valider l'adresse exacte et préparer l'expédition.
+                </p>
               </div>
-              <div className="flex gap-0.5 mb-2.5">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                ))}
-              </div>
-              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
-                "J'ai passé la commande, le service client m'a rappelé pour confirmer l'adresse. La livraison était gratuite et le livreur m'a appelé avant de passer. Produit solide et conforme."
-              </p>
-              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+              <div className="mt-3.5 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Commande confirmée & livrée (Paiement COD)</span>
+                <span>Validation personnalisée</span>
               </div>
             </div>
 
-            {/* Testimonial 3 */}
-            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs hover:shadow-md hover:border-[#8A5C38]/40 transition-all flex flex-col">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-11 h-11 rounded-full bg-[#8A5C38]/10 text-[#8A5C38] font-bold text-sm flex items-center justify-center border border-[#8A5C38]/20 shrink-0">
-                  I.B
+            {/* Step 3 */}
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-xl bg-[#8A5C38] text-white font-bold text-sm flex items-center justify-center mb-3.5 shadow-xs">
+                  3
                 </div>
-                <div>
-                  <p className="font-bold text-sm text-[#1C1008] leading-tight">Imane B.</p>
-                  <p className="text-[10px] text-[#5C3A1C]">📍 Marrakech • Guéliz</p>
-                </div>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5">Livraison Express (24-48h)</h3>
+                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+                  Notre transporteur vous livre à domicile et vous appelle avant son passage.
+                </p>
               </div>
-              <div className="flex gap-0.5 mb-2.5">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#8A5C38"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
-                ))}
-              </div>
-              <p className="text-xs text-[#5C3A1C] leading-relaxed flex-1">
-                "J'en ai commandé deux pour le salon et la chambre. Le Pack Duo était vraiment avantageux. Tout est arrivé en bon état, bien protégé. Le paiement à la livraison m'a rassurée."
-              </p>
-              <div className="mt-3 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+              <div className="mt-3.5 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
                 <IconCheck size={12} />
-                <span>Commande confirmée & livrée (Pack Duo)</span>
+                <span>Livraison 100% gratuite</span>
+              </div>
+            </div>
+
+            {/* Step 4 */}
+            <div className="bg-[#F9F6F1] rounded-2xl border border-[#E6D9C8] p-5 shadow-xs flex flex-col justify-between">
+              <div>
+                <div className="w-9 h-9 rounded-xl bg-[#128C4F] text-white font-bold text-sm flex items-center justify-center mb-3.5 shadow-xs">
+                  4
+                </div>
+                <h3 className="font-bold text-sm text-[#1C1008] mb-1.5">Paiement & Échange 7J</h3>
+                <p className="text-xs text-[#5C3A1C] leading-relaxed">
+                  Vous réglez en espèces après inspection. Garantie d'échange gratuit sous 7 jours en cas de problème.
+                </p>
+              </div>
+              <div className="mt-3.5 pt-2.5 border-t border-[#E6D9C8]/60 flex items-center gap-1.5 text-[10px] text-[#128C4F] font-semibold">
+                <IconCheck size={12} />
+                <span>Garantie Sérénité assurée</span>
               </div>
             </div>
 
@@ -1619,17 +1633,77 @@ export default function App() {
       </section>
 
       {/* ─────────────────────────────────────────────────────────────
-          10. FOOTER
+          10. FOOTER WITH LEGAL LINKS & CONTACT DETAILS
       ───────────────────────────────────────────────────────────── */}
-      <footer className="bg-[#1C1008] text-neutral-400 py-8 text-xs">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <div>
-            <span className="font-serif text-sm font-bold text-white block">Mode Trend Maroc</span>
-            <p className="text-[11px] text-neutral-400 mt-0.5">La table d'appoint ajustable et inclinable pour votre confort.</p>
+      <footer className="bg-[#1C1008] text-neutral-400 py-10 text-xs border-t border-[#302014]">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-[#2C1D13] text-left">
+            <div>
+              <span className="font-serif text-base font-bold text-white block mb-1">Mode Trend Maroc</span>
+              <p className="text-[11px] text-neutral-400 leading-relaxed mb-3">
+                Mobilier pratique et ergonomique au Maroc. Table d'appoint ajustable et inclinable pour lit, canapé et bureau.
+              </p>
+              <div className="text-[11px] text-neutral-300 space-y-1">
+                <p>📍 Service Client & Expédition : Maroc</p>
+                <p>📞 Assistance & WhatsApp : +212 7 67 95 15 63</p>
+                <p>⏰ Horaires d'ouverture : Lun - Sam (09:00 - 19:00)</p>
+              </div>
+            </div>
+
+            <div>
+              <span className="font-bold text-neutral-200 uppercase tracking-wider text-[11px] block mb-2.5">
+                Engagements & Confiance
+              </span>
+              <ul className="text-[11px] space-y-2 text-neutral-400">
+                <li className="flex items-center gap-2">
+                  <span className="text-[#128C4F]">✓</span> Livraison 100% Gratuite (24h-48h)
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#128C4F]">✓</span> Paiement en espèces à la livraison (COD)
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#128C4F]">✓</span> Vérification du colis avant règlement
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-[#128C4F]">✓</span> Échange gratuit 7 jours en cas de défaut
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <span className="font-bold text-neutral-200 uppercase tracking-wider text-[11px] block mb-2.5">
+                Informations Légales & Politiques
+              </span>
+              <div className="flex flex-col gap-2 text-[11px]">
+                <button
+                  type="button"
+                  onClick={() => setActivePolicyModal("delivery")}
+                  className="text-left text-neutral-300 hover:text-white underline underline-offset-4 cursor-pointer"
+                >
+                  Politique de Livraison & Échange (7 Jours)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActivePolicyModal("privacy")}
+                  className="text-left text-neutral-300 hover:text-white underline underline-offset-4 cursor-pointer"
+                >
+                  Politique de Confidentialité (Données)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActivePolicyModal("terms")}
+                  className="text-left text-neutral-300 hover:text-white underline underline-offset-4 cursor-pointer"
+                >
+                  Conditions Générales de Vente
+                </button>
+              </div>
+            </div>
           </div>
-          <p className="text-[11px] text-neutral-500">
-            © {new Date().getFullYear()} Mode Trend Maroc. Paiement à la livraison.
-          </p>
+
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[11px] text-neutral-500">
+            <p>© {new Date().getFullYear()} Mode Trend Maroc. Tous droits réservés.</p>
+            <p>Paiement sécurisé à la réception • Expédition express au Maroc</p>
+          </div>
         </div>
       </footer>
 
@@ -1659,6 +1733,72 @@ export default function App() {
             <IconWhatsApp size={16} />
             <span>{summary.price} DH — {form.quantite} {form.quantite > 1 ? "tables" : "table"} | Commander</span>
           </button>
+        </div>
+      )}
+
+      {/* ─────────────────────────────────────────────────────────────
+          12. ACCESSIBLE TRANSPARENCY & POLICY MODAL
+      ───────────────────────────────────────────────────────────── */}
+      {activePolicyModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-fadeIn">
+          <div className="bg-white rounded-3xl max-w-lg w-full max-h-[85vh] overflow-y-auto p-6 sm:p-7 border border-[#E6D9C8] shadow-2xl relative text-left">
+            <button
+              onClick={() => setActivePolicyModal(null)}
+              className="absolute top-4 right-4 text-neutral-400 hover:text-black w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center font-bold text-sm cursor-pointer"
+            >
+              ✕
+            </button>
+
+            {activePolicyModal === "delivery" && (
+              <div>
+                <h3 className="font-serif text-xl font-bold text-[#1C1008] mb-3">
+                  Politique de Livraison & Échange (7 Jours)
+                </h3>
+                <div className="text-xs text-[#5C3A1C] space-y-3 leading-relaxed">
+                  <p><strong>1. Délais et zones de livraison :</strong> Nous livrons gratuitement partout au Maroc sous 24h à 48h ouvrables pour Casablanca, Rabat, Marrakech, Tanger, Fès, Agadir, et 48h à 72h pour les autres villes.</p>
+                  <p><strong>2. Modalités de paiement :</strong> Le règlement se fait exclusivement à la livraison en espèces (Cash on Delivery) directement au transporteur.</p>
+                  <p><strong>3. Vérification du colis :</strong> Vous êtes invité(e) à inspecter l'état du colis à la réception avant le paiement.</p>
+                  <p><strong>4. Garantie Échange 7 Jours :</strong> En cas de pièce manquante ou endommagée lors du transport, nous procédons au remplacement gratuit sous 7 jours après contact avec notre support WhatsApp (+212 7 67 95 15 63).</p>
+                </div>
+              </div>
+            )}
+
+            {activePolicyModal === "privacy" && (
+              <div>
+                <h3 className="font-serif text-xl font-bold text-[#1C1008] mb-3">
+                  Politique de Confidentialité
+                </h3>
+                <div className="text-xs text-[#5C3A1C] space-y-3 leading-relaxed">
+                  <p><strong>1. Collecte des données :</strong> Les données personnelles recueillies (nom, téléphone, ville, adresse) sont strictement utilisées pour le traitement, la validation téléphonique et l'expédition de votre commande au Maroc.</p>
+                  <p><strong>2. Non-cession :</strong> Vos informations ne sont jamais vendues ni cédées à des tiers à des fins publicitaires.</p>
+                  <p><strong>3. Vos droits :</strong> Vous pouvez demander la suppression de vos coordonnées à tout moment via notre service client WhatsApp.</p>
+                </div>
+              </div>
+            )}
+
+            {activePolicyModal === "terms" && (
+              <div>
+                <h3 className="font-serif text-xl font-bold text-[#1C1008] mb-3">
+                  Conditions Générales de Vente
+                </h3>
+                <div className="text-xs text-[#5C3A1C] space-y-3 leading-relaxed">
+                  <p><strong>1. Prix et offres :</strong> Les prix affichés en Dirhams marocains (DH) incluent la table et les frais de livraison. Les offres promotionnelles sont valables dans la limite des stocks disponibles.</p>
+                  <p><strong>2. Confirmation :</strong> La commande passée via le formulaire ou WhatsApp fait l'objet d'un contact de confirmation téléphonique préalable à toute expédition.</p>
+                  <p><strong>3. Service Client :</strong> Pour toute question relative à votre achat, notre équipe est à votre disposition du Lundi au Samedi de 09:00 à 19:00.</p>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-6 pt-4 border-t border-[#E6D9C8] text-right">
+              <button
+                type="button"
+                onClick={() => setActivePolicyModal(null)}
+                className="bg-[#8A5C38] text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-[#7A4F30] cursor-pointer"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
