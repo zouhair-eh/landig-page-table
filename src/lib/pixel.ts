@@ -110,9 +110,12 @@ export function trackInitiateCheckout(data?: {
 }
 
 /**
- * 4. Lead — Déclenché quand l'utilisateur soumet correctement le formulaire de commande
+ * 4. Lead — Déclenché quand l'utilisateur soumet correctement le formulaire de commande.
+ * Dédoublonnage strict :
+ *   - Par eventId (lead ID unique) : si le même ID a déjà été envoyé, on ignore.
+ *   - Par session (window flag) : empêche tout re-fire sur navigation retour ou re-montage.
  * (AUCUN événement Purchase n'est envoyé ici conformément aux exigences)
- * Compatible Conversions API (CAPI) avec dédoublonnage via eventID
+ * Compatible Conversions API (CAPI).
  */
 export function trackLead(
   data?: {
@@ -123,19 +126,41 @@ export function trackLead(
   },
   eventId?: string
 ) {
-  if (typeof window !== "undefined" && window.fbq) {
-    const payload = {
-      content_name: data?.content_name || "Table d'Appoint Mode Trend (Réglable & Inclinable)",
-      value: data?.value || 249,
-      currency: data?.currency || "MAD",
-      num_items: data?.quantity || 1,
-    };
+  if (typeof window === "undefined" || !window.fbq) return;
 
-    if (eventId) {
-      window.fbq("track", "Lead", payload, { eventID: eventId });
-    } else {
-      window.fbq("track", "Lead", payload);
-    }
+  // Dedup by eventId: never fire the same lead ID twice in the same session
+  const firedIds: string[] = (window as any).__leadFiredIds ?? [];
+  if (eventId && firedIds.includes(eventId)) {
+    return;
+  }
+
+  const payload = {
+    content_name: data?.content_name || "Table d'Appoint Mode Trend (Réglable & Inclinable)",
+    value: data?.value || 249,
+    currency: data?.currency || "MAD",
+    num_items: data?.quantity || 1,
+  };
+
+  if (eventId) {
+    window.fbq("track", "Lead", payload, { eventID: eventId });
+    // Record this ID so it can never be fired again in the same browser session
+    firedIds.push(eventId);
+    (window as any).__leadFiredIds = firedIds;
+  } else {
+    // No eventId: fall back to a single-fire-per-session guard
+    if ((window as any).__leadFiredAnonymous) return;
+    window.fbq("track", "Lead", payload);
+    (window as any).__leadFiredAnonymous = true;
+  }
+}
+
+/**
+ * Reset Lead deduplication flags — for testing only, never call in production.
+ */
+export function resetLeadDedup() {
+  if (typeof window !== "undefined") {
+    delete (window as any).__leadFiredIds;
+    delete (window as any).__leadFiredAnonymous;
   }
 }
 

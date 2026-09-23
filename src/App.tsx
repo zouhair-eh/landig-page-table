@@ -318,59 +318,70 @@ export default function App() {
   };
 
   // 4. Meta Pixel + Local/Cloud Persistence: Save lead immediately before opening WhatsApp
+  const leadFiredRef = useRef(false);
+
   const handleOrderSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
 
-    // Double submit protection: ignore any rapid re-clicks / double clicks
+    // ── Step 1: Guard against rapid double-clicks / re-submissions ──
     if (isSubmittingRef.current) {
       return;
     }
 
-    const nomTrimmed = form.nom.trim();
-    const phoneTrimmed = form.telephone.trim();
-    const villeTrimmed = form.ville.trim();
+    const nomTrimmed    = form.nom.trim();
+    const phoneTrimmed  = form.telephone.trim();
+    const villeTrimmed  = form.ville.trim();
     const adresseTrimmed = form.adresse.trim();
 
-    // Strict validation of required fields
+    // ── Step 2: Validate BEFORE doing anything else ──
     if (!nomTrimmed || !phoneTrimmed || !villeTrimmed || !adresseTrimmed) {
-      return;
+      return; // Validation failed — Lead event must NOT fire
     }
 
-    // Lock submission immediately to prevent duplicate Lead firing
+    // ── Step 3: Lock submission to prevent any duplicate event ──
     isSubmittingRef.current = true;
 
     const currentSummary = getOrderSummary(form.quantite);
 
-    // 1. Persist lead data locally (and via webhook) to ensure ZERO lost leads if WhatsApp is closed
+    // ── Step 4: Persist the lead (localStorage + optional webhook) ──
+    // This is synchronous for localStorage; webhook is fire-and-forget.
     const savedLead = saveLead({
-      nom: nomTrimmed,
-      telephone: phoneTrimmed,
-      ville: villeTrimmed,
-      adresse: adresseTrimmed,
-      quantite: form.quantite,
-      formule: currentSummary.label,
+      nom:         nomTrimmed,
+      telephone:   phoneTrimmed,
+      ville:       villeTrimmed,
+      adresse:     adresseTrimmed,
+      quantite:    form.quantite,
+      formule:     currentSummary.label,
       montantTotal: currentSummary.price,
     });
 
-    // 2. Fire 1 single Lead event with the unique eventID
-    trackLead(
-      {
-        content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
-        value: currentSummary.price,
-        currency: "MAD",
-        quantity: form.quantite,
-      },
-      savedLead.id
-    );
+    // ── Step 5: Fire the Lead pixel event EXACTLY ONCE using the saved lead's unique ID.
+    //    The ID-based dedup in trackLead ensures no duplicate even if this code path
+    //    is hit again before the cooldown resets (e.g., React StrictMode double-invoke).
+    if (!leadFiredRef.current) {
+      leadFiredRef.current = true;
+      trackLead(
+        {
+          content_name: "Table d'Appoint Mode Trend (Réglable & Inclinable)",
+          value:    currentSummary.price,
+          currency: "MAD",
+          quantity: form.quantite,
+        },
+        savedLead.id   // Unique per submission — prevents server-side dedup issues too
+      );
+    }
 
-    // 3. Open WhatsApp
+    // ── Step 6: Open WhatsApp AFTER lead has been captured and pixel has fired ──
     const url = generateWhatsAppLink(form);
     window.open(url, "_blank", "noopener,noreferrer");
 
-    // Cooldown lock to ensure double clicks never generate duplicate leads
+    // ── Step 7: Release the submission lock after a cooldown ──
+    // This allows a legitimate re-order (new tab opened) without being permanently blocked,
+    // while still preventing accidental double-clicks within the cooldown window.
     setTimeout(() => {
       isSubmittingRef.current = false;
+      // Note: leadFiredRef stays true — we never re-fire Lead for the same session order.
     }, 4000);
   };
 
