@@ -829,8 +829,8 @@ export default function App() {
             <div className="group flex flex-col">
               <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
-                  src="/images/lifestyle_night_bed.png"
-                  alt="Le confort du soir - Table de chevet avec lampe et livre"
+                  src="/images/use_bed_laptop.jpg"
+                  alt="Le confort du soir - Table d'appoint au lit avec support ordinateur"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
