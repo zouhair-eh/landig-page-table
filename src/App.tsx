@@ -847,12 +847,12 @@ export default function App() {
               </div>
             </div>
 
-            {/* Card 2: Coin détente */}
+            {/* Card 2: Robustesse & Stabilité */}
             <div className="group flex flex-col">
               <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
-                  src="/images/lifestyle_sofa_relax.png"
-                  alt="Coin détente - Table près du canapé avec plateau et café"
+                  src="/images/use_structure_strength.jpg"
+                  alt="Robustesse et stabilité - Structure acier 25mm renforcée supportant une charge lourde"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
@@ -860,21 +860,21 @@ export default function App() {
               <div className="pt-4 sm:pt-5 text-left flex-1 flex flex-col justify-between">
                 <div>
                   <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">
-                    Coin détente
+                    Robustesse & Stabilité
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
-                    Gardez vos essentiels à portée de main lors de vos moments de repos sur le canapé.
+                    Structure en acier renforcé 25 mm conçue pour supporter facilement vos livres, appareils et objets du quotidien.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Card 3: Instants en extérieur */}
+            {/* Card 3: Espace de travail au canapé */}
             <div className="group flex flex-col">
               <div className="relative aspect-4/3 sm:aspect-square overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E6D9C8] bg-white shadow-xs">
                 <img
-                  src="/images/lifestyle_balcony.png"
-                  alt="Instants en extérieur - Table sur le balcon ou la terrasse"
+                  src="/images/use_sofa_laptop.jpg"
+                  alt="Espace de travail au canapé - Table d'appoint avec ordinateur portable et smartphone"
                   className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                   loading="lazy"
                 />
@@ -882,10 +882,10 @@ export default function App() {
               <div className="pt-4 sm:pt-5 text-left flex-1 flex flex-col justify-between">
                 <div>
                   <h3 className="font-serif italic text-xl font-bold text-[#1C1008] mb-1.5 group-hover:text-[#8A5C38] transition-colors">
-                    Instants en extérieur
+                    Travail & Détente au canapé
                   </h3>
                   <p className="text-xs sm:text-sm text-[#5C3A1C] leading-relaxed">
-                    Profitez d’une pause café ou lecture sur votre balcon ou terrasse en toute légèreté.
+                    Glissez la base sous votre canapé pour travailler ou surfer confortablement avec votre PC et smartphone à portée de main.
                   </p>
                 </div>
               </div>
@@ -939,8 +939,8 @@ export default function App() {
               <div className="lg:col-span-7 order-1">
                 <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-white">
                   <img
-                    src="/images/lifestyle_armchair_decor.png"
-                    alt="Décoration salon moderne et élégante avec la table ajustable"
+                    src="/images/lifestyle_elegance_reading.jpg"
+                    alt="Table d'appoint design et élégante avec journal, lunettes et café sur tapis rond"
                     className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
@@ -1003,8 +1003,8 @@ export default function App() {
               <div className="lg:col-span-7 order-1 lg:order-2">
                 <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E6D9C8] shadow-sm aspect-4/3 sm:aspect-16/10 bg-white">
                   <img
-                    src="/images/lifestyle_space_smart.jpg"
-                    alt="Table d'appoint Mode Trend glissant parfaitement sous le canapé dans un salon lumineux"
+                    src="/images/lifestyle_tilt_bed_angle.jpg"
+                    alt="Table d'appoint inclinable multi-angles pour ordinateur portable au lit"
                     className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-500"
                     loading="lazy"
                     decoding="async"
