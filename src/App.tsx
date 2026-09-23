@@ -13,7 +13,7 @@ import { saveLead } from "./lib/leads";
    CONFIG & WHATSAPP LINK GENERATOR
 ───────────────────────────────────────────────────────────────────────────── */
 // Numéro WhatsApp boutique
-const WHATSAPP_NUMBER = "212767951563";
+const WHATSAPP_NUMBER = "212776330099";
 
 interface OrderData {
   nom: string;
@@ -432,7 +432,7 @@ export default function App() {
     },
     {
       q: "Quelle est la garantie et que faire en cas de problème ?",
-      a: "Vous bénéficiez d'une garantie d'échange gratuit sous 7 jours en cas de pièce défectueuse ou de non-conformité. Notre service après-vente basé au Maroc est joignable 6j/7 sur WhatsApp au +212 7 67 95 15 63.",
+      a: "Vous bénéficiez d'une garantie d'échange gratuit sous 7 jours en cas de pièce défectueuse ou de non-conformité. Notre service après-vente basé au Maroc est joignable 6j/7 sur WhatsApp au +212 7 76 33 00 99.",
     },
     {
       q: "Quelles sont les dimensions et réglages de la table Mode Trend ?",
@@ -1656,7 +1656,7 @@ export default function App() {
               </p>
               <div className="text-[11px] text-neutral-300 space-y-1">
                 <p>📍 Service Client & Expédition : Maroc</p>
-                <p>📞 Assistance & WhatsApp : +212 7 67 95 15 63</p>
+                <p>📞 Assistance & WhatsApp : +212 7 76 33 00 99</p>
                 <p>⏰ Horaires d'ouverture : Lun - Sam (09:00 - 19:00)</p>
               </div>
             </div>
