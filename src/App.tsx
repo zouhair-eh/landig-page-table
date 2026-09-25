@@ -206,7 +206,7 @@ function IconChevronDown({ size = 18, className = "" }: { size?: number; classNa
    MAIN COMPONENT — Mode Trend Maroc
 ───────────────────────────────────────────────────────────────────────────── */
 export default function App() {
-  const [activeTab, setActiveTab] = useState<"sofa" | "bed" | "tilt" | "details">("sofa");
+  const [activeTab, setActiveTab] = useState<"sofa" | "bed" | "tilt" | "details" | "video">("sofa");
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -419,6 +419,12 @@ export default function App() {
       title: "Table Mode Trend Réglable & Inclinable",
       desc: "Plateau finition bois noyer et armature métallique noir mat avec positions multiples.",
     },
+    video: {
+      src: "/video.mp4",
+      badge: "🎥 Démonstration Vidéo",
+      title: "Table Mode Trend en utilisation réelle",
+      desc: "Découvrez en vidéo la facilité de réglage en hauteur, l'inclinaison du plateau et la fluidité d'utilisation.",
+    },
   };
 
   const faqs = [
@@ -500,30 +506,47 @@ export default function App() {
             <div className="w-full lg:col-span-6 xl:col-span-7 order-1 lg:order-2">
               <div className="bg-white p-2 sm:p-4 rounded-2xl sm:rounded-3xl border border-[#E6D9C8] shadow-sm">
                 
-                {/* Main image container */}
+                {/* Main media container (Image or Video) */}
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-[#FAF6F0] h-[290px] sm:h-[360px] lg:h-[450px] flex items-center justify-center mb-2.5">
-                  <img
-                    src={gallery[activeTab].src}
-                    alt={gallery[activeTab].title}
-                    className={`w-full h-full ${activeTab === "details" ? "object-contain p-2" : "object-cover"} object-center transition-all duration-300`}
-                    loading="eager"
-                    fetchPriority="high"
-                  />
+                  {activeTab === "video" ? (
+                    <video
+                      src="/video.mp4"
+                      poster="/images/exact_sofa.jpg"
+                      controls
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover bg-black rounded-xl sm:rounded-2xl"
+                    >
+                      Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                  ) : (
+                    <img
+                      src={gallery[activeTab].src}
+                      alt={gallery[activeTab].title}
+                      className={`w-full h-full ${activeTab === "details" ? "object-contain p-2" : "object-cover"} object-center transition-all duration-300`}
+                      loading="eager"
+                      fetchPriority="high"
+                    />
+                  )}
 
-                  <div className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full shadow-xs">
+                  <div className="absolute top-2.5 left-2.5 bg-black/75 backdrop-blur-md text-white text-[10px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full shadow-xs pointer-events-none">
                     {gallery[activeTab].badge}
                   </div>
                 </div>
 
-                {/* Fast Image Switcher Tabs: Canapé -> Lit -> Incliné -> Détails */}
-                <div className="grid grid-cols-4 gap-1.5">
-                  {(["sofa", "bed", "tilt", "details"] as const).map((key) => (
+                {/* Fast Media Switcher Tabs: Canapé -> Lit -> Incliné -> Détails -> Vidéo */}
+                <div className="grid grid-cols-5 gap-1 sm:gap-1.5">
+                  {(["sofa", "bed", "tilt", "details", "video"] as const).map((key) => (
                     <button
                       key={key}
                       onClick={() => setActiveTab(key)}
-                      className={`py-2 px-1 rounded-lg text-[11px] sm:text-xs font-bold text-center border transition-all cursor-pointer ${
+                      className={`py-2 px-1 rounded-lg text-[10px] sm:text-xs font-bold text-center border transition-all cursor-pointer ${
                         activeTab === key
                           ? "bg-[#8A5C38] text-white border-[#8A5C38] shadow-xs"
+                          : key === "video"
+                          ? "bg-[#8A5C38]/10 text-[#8A5C38] border-[#8A5C38]/30 hover:bg-[#8A5C38]/20"
                           : "bg-[#F9F6F1] text-[#5C3A1C] border-[#E6D9C8] hover:bg-[#F2EBE0]"
                       }`}
                     >
@@ -531,6 +554,7 @@ export default function App() {
                       {key === "bed" && "🛏️ Lit"}
                       {key === "tilt" && "📐 Incliné"}
                       {key === "details" && "🔍 Détails"}
+                      {key === "video" && "🎥 Vidéo"}
                     </button>
                   ))}
                 </div>
@@ -978,6 +1002,60 @@ export default function App() {
                     Lignes douces et coins arrondis sécurisés
                   </li>
                 </ul>
+              </div>
+            </div>
+
+            {/* Video Spotlight Showcase Row */}
+            <div className="bg-gradient-to-br from-[#1C1008] to-[#2E1A0F] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl border border-[#8A5C38]/30">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
+                <div className="lg:col-span-5 text-left">
+                  <div className="inline-flex items-center gap-2 bg-[#8A5C38]/30 border border-[#8A5C38]/50 px-3 py-1 rounded-full text-xs font-bold text-[#E6D9C8] mb-3">
+                    <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+                    Démonstration Réelle en Vidéo
+                  </div>
+                  <h3 className="font-serif italic text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
+                    Découvrez la table en action réelle
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#E6D9C8]/90 leading-relaxed mb-5">
+                    Voyez par vous-même la simplicité du réglage en hauteur, la stabilité remarquable de la structure en acier et le confort d'utilisation au quotidien sur votre canapé ou votre lit.
+                  </p>
+                  <div className="space-y-2.5 mb-6 text-xs sm:text-sm text-neutral-200">
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-[#25D366]/20 text-[#25D366] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                      <span>Réglage fluide de 50 à 60 cm en un tour de molette</span>
+                    </div>
+                    <div className="flex items-center gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-[#25D366]/20 text-[#25D366] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
+                      <span>Plateau inclinable multi-angles avec arrêt sécurisé</span>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const formElem = document.getElementById("order-form-section") || document.querySelector("form");
+                      if (formElem) {
+                        formElem.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    }}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm shadow-lg shadow-[#25D366]/20 active:scale-95 transition-all cursor-pointer"
+                  >
+                    <IconWhatsApp size={18} />
+                    <span>Commander maintenant — {summary.price} DH</span>
+                  </button>
+                </div>
+                <div className="lg:col-span-7">
+                  <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-black aspect-video sm:aspect-16/10 border-2 border-[#8A5C38]/40 shadow-2xl">
+                    <video
+                      src="/video.mp4"
+                      poster="/images/exact_sofa.jpg"
+                      controls
+                      playsInline
+                      className="w-full h-full object-cover"
+                    >
+                      Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                  </div>
+                </div>
               </div>
             </div>
 
