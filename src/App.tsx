@@ -420,7 +420,7 @@ export default function App() {
       desc: "Plateau finition bois noyer et armature métallique noir mat avec positions multiples.",
     },
     video: {
-      src: "/video.mp4",
+      src: "/images/video_table_mode_trend.mov",
       badge: "🎥 Démonstration Vidéo",
       title: "Table Mode Trend en utilisation réelle",
       desc: "Découvrez en vidéo la facilité de réglage en hauteur, l'inclinaison du plateau et la fluidité d'utilisation.",
@@ -510,7 +510,6 @@ export default function App() {
                 <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-[#FAF6F0] h-[290px] sm:h-[360px] lg:h-[450px] flex items-center justify-center mb-2.5">
                   {activeTab === "video" ? (
                     <video
-                      src="/video.mp4"
                       poster="/images/exact_sofa.jpg"
                       controls
                       autoPlay
@@ -519,6 +518,9 @@ export default function App() {
                       playsInline
                       className="w-full h-full object-cover bg-black rounded-xl sm:rounded-2xl"
                     >
+                      <source src="/images/video_table_mode_trend.mov" type="video/mp4" />
+                      <source src="/images/Video%20Table%20Mode%20trend.mov" type="video/quicktime" />
+                      <source src="/video.mp4" type="video/mp4" />
                       Votre navigateur ne supporte pas la lecture de vidéos.
                     </video>
                   ) : (
@@ -1046,12 +1048,14 @@ export default function App() {
                 <div className="lg:col-span-7">
                   <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-black aspect-video sm:aspect-16/10 border-2 border-[#8A5C38]/40 shadow-2xl">
                     <video
-                      src="/video.mp4"
                       poster="/images/exact_sofa.jpg"
                       controls
                       playsInline
                       className="w-full h-full object-cover"
                     >
+                      <source src="/images/video_table_mode_trend.mov" type="video/mp4" />
+                      <source src="/images/Video%20Table%20Mode%20trend.mov" type="video/quicktime" />
+                      <source src="/video.mp4" type="video/mp4" />
                       Votre navigateur ne supporte pas la lecture de vidéos.
                     </video>
                   </div>
