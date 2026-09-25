@@ -516,10 +516,10 @@ export default function App() {
                       muted
                       loop
                       playsInline
-                      className="w-full h-full object-cover bg-black rounded-xl sm:rounded-2xl"
+                      className="w-full h-full object-contain bg-black rounded-xl sm:rounded-2xl"
                     >
                       <source src="/images/video_table_mode_trend.mov" type="video/mp4" />
-                      <source src="/images/Video%20Table%20Mode%20trend.mov" type="video/quicktime" />
+                      <source src="/images/video_table_mode_trend.mov" type="video/quicktime" />
                       <source src="/video.mp4" type="video/mp4" />
                       Votre navigateur ne supporte pas la lecture de vidéos.
                     </video>
@@ -1045,16 +1045,16 @@ export default function App() {
                     <span>Commander maintenant — {summary.price} DH</span>
                   </button>
                 </div>
-                <div className="lg:col-span-7">
-                  <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-black aspect-video sm:aspect-16/10 border-2 border-[#8A5C38]/40 shadow-2xl">
+                <div className="lg:col-span-7 flex justify-center items-center">
+                  <div className="relative w-full max-w-[320px] sm:max-w-[360px] rounded-3xl overflow-hidden border-4 border-[#8A5C38]/40 shadow-2xl ring-1 ring-white/15 bg-[#1C1008]">
                     <video
                       poster="/images/exact_sofa.jpg"
                       controls
                       playsInline
-                      className="w-full h-full object-cover"
+                      className="w-full h-auto block"
                     >
                       <source src="/images/video_table_mode_trend.mov" type="video/mp4" />
-                      <source src="/images/Video%20Table%20Mode%20trend.mov" type="video/quicktime" />
+                      <source src="/images/video_table_mode_trend.mov" type="video/quicktime" />
                       <source src="/video.mp4" type="video/mp4" />
                       Votre navigateur ne supporte pas la lecture de vidéos.
                     </video>
