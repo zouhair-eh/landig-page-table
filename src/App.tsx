@@ -1009,19 +1009,39 @@ export default function App() {
 
             {/* Video Spotlight Showcase Row */}
             <div className="bg-gradient-to-br from-[#1C1008] to-[#2E1A0F] text-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 shadow-xl border border-[#8A5C38]/30">
+              
+              {/* Header on mobile (Badge + Title) */}
+              <div className="lg:hidden text-center sm:text-left mb-4">
+                <div className="inline-flex items-center gap-2 bg-[#8A5C38]/30 border border-[#8A5C38]/50 px-3 py-1 rounded-full text-xs font-bold text-[#E6D9C8] mb-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+                  Démonstration Réelle en Vidéo
+                </div>
+                <h3 className="font-serif italic text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+                  Découvrez la table en action réelle
+                </h3>
+              </div>
+
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-center">
-                <div className="lg:col-span-5 text-left">
-                  <div className="inline-flex items-center gap-2 bg-[#8A5C38]/30 border border-[#8A5C38]/50 px-3 py-1 rounded-full text-xs font-bold text-[#E6D9C8] mb-3">
-                    <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
-                    Démonstration Réelle en Vidéo
+                
+                {/* Desktop Left / Mobile Bottom Content (Details & CTA) */}
+                <div className="lg:col-span-5 text-left order-2 lg:order-1">
+                  
+                  {/* Header on desktop only */}
+                  <div className="hidden lg:block">
+                    <div className="inline-flex items-center gap-2 bg-[#8A5C38]/30 border border-[#8A5C38]/50 px-3 py-1 rounded-full text-xs font-bold text-[#E6D9C8] mb-3">
+                      <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+                      Démonstration Réelle en Vidéo
+                    </div>
+                    <h3 className="font-serif italic text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
+                      Découvrez la table en action réelle
+                    </h3>
                   </div>
-                  <h3 className="font-serif italic text-2xl sm:text-3xl font-extrabold text-white leading-tight mb-3">
-                    Découvrez la table en action réelle
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[#E6D9C8]/90 leading-relaxed mb-5">
+
+                  <p className="text-xs sm:text-sm text-[#E6D9C8]/90 leading-relaxed mb-4">
                     Voyez par vous-même la simplicité du réglage en hauteur, la stabilité remarquable de la structure en acier et le confort d'utilisation au quotidien sur votre canapé ou votre lit.
                   </p>
-                  <div className="space-y-2.5 mb-6 text-xs sm:text-sm text-neutral-200">
+                  
+                  <div className="space-y-2 mb-5 text-xs sm:text-sm text-neutral-200">
                     <div className="flex items-center gap-2.5">
                       <span className="w-5 h-5 rounded-full bg-[#25D366]/20 text-[#25D366] flex items-center justify-center text-xs font-bold shrink-0">✓</span>
                       <span>Réglage fluide de 50 à 60 cm en un tour de molette</span>
@@ -1031,6 +1051,7 @@ export default function App() {
                       <span>Plateau inclinable multi-angles avec arrêt sécurisé</span>
                     </div>
                   </div>
+
                   <button
                     type="button"
                     onClick={() => {
@@ -1039,14 +1060,16 @@ export default function App() {
                         formElem.scrollIntoView({ behavior: "smooth", block: "start" });
                       }
                     }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm shadow-lg shadow-[#25D366]/20 active:scale-95 transition-all cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm shadow-lg shadow-[#25D366]/20 active:scale-95 transition-all cursor-pointer"
                   >
                     <IconWhatsApp size={18} />
                     <span>Commander maintenant — {summary.price} DH</span>
                   </button>
                 </div>
-                <div className="lg:col-span-7 flex justify-center items-center">
-                  <div className="relative w-full max-w-[320px] sm:max-w-[360px] rounded-3xl overflow-hidden border-4 border-[#8A5C38]/40 shadow-2xl ring-1 ring-white/15 bg-[#1C1008]">
+
+                {/* Video Player (Desktop Right / Mobile Order 1 directly below title) */}
+                <div className="lg:col-span-7 flex justify-center items-center order-1 lg:order-2">
+                  <div className="relative w-full max-w-[300px] sm:max-w-[340px] rounded-3xl overflow-hidden border-4 border-[#8A5C38]/40 shadow-2xl ring-1 ring-white/15 bg-[#1C1008]">
                     <video
                       poster="/images/exact_sofa.jpg"
                       controls
@@ -1060,6 +1083,7 @@ export default function App() {
                     </video>
                   </div>
                 </div>
+
               </div>
             </div>
 
