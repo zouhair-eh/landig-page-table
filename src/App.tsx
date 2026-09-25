@@ -347,13 +347,14 @@ export default function App() {
     // ── Step 4: Persist the lead (localStorage + optional webhook) ──
     // This is synchronous for localStorage; webhook is fire-and-forget.
     const savedLead = saveLead({
-      nom:         nomTrimmed,
-      telephone:   phoneTrimmed,
-      ville:       villeTrimmed,
-      adresse:     adresseTrimmed,
-      quantite:    form.quantite,
-      formule:     currentSummary.label,
+      nom:          nomTrimmed,
+      telephone:    phoneTrimmed,
+      ville:        villeTrimmed,
+      adresse:      adresseTrimmed,
+      quantite:     form.quantite,
+      formule:      currentSummary.label,
       montantTotal: currentSummary.price,
+      unit_price:   currentSummary.unitPrice,
     });
 
     // ── Step 5: Fire the Lead pixel event EXACTLY ONCE using the saved lead's unique ID.

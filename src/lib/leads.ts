@@ -38,6 +38,9 @@ export interface SavedLead {
   last_updated?: string;
 }
 
+export const LEADS_WEBHOOK_URL =
+  (typeof import.meta !== "undefined" && import.meta.env?.VITE_LEADS_WEBHOOK_URL) || "";
+
 const STORAGE_KEY = "modetrend_leads_store";
 
 function getUtmParams() {
@@ -61,13 +64,16 @@ export function saveLead(leadData: {
   quantite: number;
   formule: string;
   montantTotal: number;
+  unit_price?: number;
   product?: string;
   notes?: string;
 }): SavedLead {
   const nowIso = new Date().toISOString();
   const uniqueId = `lead_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   const utm = getUtmParams();
-  const unitPrice = leadData.quantite > 0 ? Math.round(leadData.montantTotal / leadData.quantite) : 249;
+  const calculatedUnitPrice =
+    leadData.unit_price ??
+    (leadData.quantite > 0 ? Number((leadData.montantTotal / leadData.quantite).toFixed(2)) : 249);
 
   const newLead: SavedLead = {
     id: uniqueId,
@@ -85,7 +91,7 @@ export function saveLead(leadData: {
     quantity: leadData.quantite,
     formule: leadData.formule,
     pack: leadData.formule,
-    unit_price: unitPrice,
+    unit_price: calculatedUnitPrice,
     montantTotal: leadData.montantTotal,
     total: leadData.montantTotal,
     utm_source: utm.utm_source,
@@ -109,7 +115,7 @@ export function saveLead(leadData: {
   }
 
   // Webhook integration (Google Sheets Apps Script / CRM / Zapier)
-  const webhookUrl = (typeof import.meta !== "undefined" && import.meta.env?.VITE_LEADS_WEBHOOK_URL) || "";
+  const webhookUrl = LEADS_WEBHOOK_URL;
   if (webhookUrl) {
     fetch(webhookUrl, {
       method: "POST",
@@ -119,6 +125,8 @@ export function saveLead(leadData: {
     }).catch((err) => {
       console.warn("Webhook dispatch error:", err);
     });
+  } else {
+    console.warn("VITE_LEADS_WEBHOOK_URL is not configured. Lead persisted to localStorage only.");
   }
 
   return newLead;
